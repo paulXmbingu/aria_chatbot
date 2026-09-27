@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+    <title>Aria Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="mobile-sidebar-header">
+                    <div class="brand">
+                        <span class="brand-mark">A</span>
+                        <span>Aria Chat</span>
+                    </div>
+
+                    <button
+                        id="close-sidebar-btn"
+                        class="mobile-sidebar-close"
+                        type="button"
+                        aria-label="Close sidebar"
+                    >
+                        ×
+                    </button>
+                </div>
+
+                <div class="brand desktop-brand">
+                    <span class="brand-mark">A</span>
+                    <span>Aria Chat</span>
+                </div>
+
+                <button id="new-chat-btn" type="button">
+                    New chat
+                </button>
+            </div>
+
+            <div class="conversation-section">
+                <div class="section-label">Chats</div>
+
+                <div
+                    id="conversation-list"
+                    class="conversation-list"
+                >
+                    <!-- Conversations will appear here -->
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div
+                        class="user-avatar"
+                        aria-hidden="true"
+                    >
+                        PM
+                    </div>
+
+                    <span>Paul Mbingu</span>
+                </div>
+            </div>
+        </aside>
+
+        <div
+            id="sidebar-overlay"
+            class="sidebar-overlay"
+        ></div>
+
+        <main class="chat">
+            <div class="mobile-chat-header">
+                <button
+                    id="open-sidebar-btn"
+                    class="mobile-menu-button"
+                    type="button"
+                    aria-label="Open sidebar"
+                >
+                    ☰
+                </button>
+
+                <div class="mobile-chat-brand">
+                    Aria Chat
+                </div>
+
+                <button
+                    id="mobile-new-chat-btn"
+                    class="mobile-new-chat-button"
+                    type="button"
+                    aria-label="New chat"
+                >
+                    +
+                </button>
+            </div>
+
+            <section
+                id="messages"
+                class="messages"
+            >
+                <div
+                    id="empty-state"
+                    class="empty-state"
+                >
+                    <div class="empty-state-mark">A</div>
+
+                    <h1>
+                        How can I help you today?
+                    </h1>
+
+                    <p>
+                        Ask me anything, explain a concept,
+                        write some code, or explore an idea.
+                    </p>
+                </div>
+            </section>
+
+            <div class="composer-container">
+                <form
+                    id="chat-form"
+                    class="composer"
+                >
+                    <input
+                        id="message-input"
+                        type="text"
+                        placeholder="Message Aria..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        id="send-btn"
+                        type="submit"
+                        aria-label="Send message"
+                    >
+                        ↑
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
