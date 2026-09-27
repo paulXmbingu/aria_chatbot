@@ -697,36 +697,6 @@ function setLoading(
 
 
 /* ========================================
-   Conversation Titles
-======================================== */
-
-function createConversationTitle(
-    message
-) {
-    const cleaned =
-        message
-            .replace(/\s+/g, " ")
-            .trim();
-
-    if (!cleaned) {
-        return "New chat";
-    }
-
-    const words =
-        cleaned.split(" ");
-
-    const title =
-        words
-            .slice(0, 6)
-            .join(" ");
-
-    return title.length > 40
-        ? `${title.substring(0, 40)}...`
-        : title;
-}
-
-
-/* ========================================
    Conversations
 ======================================== */
 
@@ -819,16 +789,318 @@ async function loadConversations() {
 
 
 /* ========================================
+   Conversation Menu
+======================================== */
+
+function closeConversationMenus() {
+    document
+        .querySelectorAll(
+            ".conversation-menu.open"
+        )
+        .forEach(
+            (menu) => {
+                menu.classList.remove(
+                    "open"
+                );
+            }
+        );
+}
+
+
+function toggleConversationMenu(
+    menu
+) {
+    const isOpen =
+        menu.classList.contains(
+            "open"
+        );
+
+    closeConversationMenus();
+
+    if (!isOpen) {
+        menu.classList.add(
+            "open"
+        );
+    }
+}
+
+
+/* ========================================
+   Rename Conversation
+======================================== */
+
+async function renameConversation(
+    conversation,
+    item,
+    titleElement,
+    input
+) {
+    const title =
+        input.value.trim();
+
+    if (!title) {
+        item.replaceChildren(
+            titleElement
+        );
+
+        return;
+    }
+
+    if (
+        title ===
+        conversation.title
+    ) {
+        item.replaceChildren(
+            titleElement
+        );
+
+        return;
+    }
+
+    input.disabled = true;
+
+    try {
+        const response =
+            await fetch(
+                `/api/chat/conversations/${conversation.id}/rename/`,
+                {
+                    method: "PATCH",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                    },
+
+                    body: JSON.stringify({
+                        title,
+                    }),
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                getApiError(data)
+            );
+        }
+
+        conversation.title =
+            data.title;
+
+        titleElement.textContent =
+            data.title;
+
+        titleElement.title =
+            data.title;
+
+        item.replaceChildren(
+            titleElement
+        );
+
+    } catch (error) {
+        console.error(
+            error
+        );
+
+        item.replaceChildren(
+            titleElement
+        );
+
+        alert(
+            error.message ||
+            "Unable to rename conversation."
+        );
+    }
+}
+
+
+function startRenameConversation(
+    conversation,
+    item
+) {
+    closeConversationMenus();
+
+    const titleElement =
+        item.querySelector(
+            ".conversation-title"
+        );
+
+    if (!titleElement) {
+        return;
+    }
+
+    const input =
+        document.createElement(
+            "input"
+        );
+
+    input.type = "text";
+    input.className =
+        "conversation-rename-input";
+    input.value =
+        conversation.title ||
+        "New Conversation";
+    input.maxLength = 120;
+    input.autocomplete = "off";
+
+    item.replaceChildren(
+        input
+    );
+
+    input.focus();
+    input.select();
+
+    let completed = false;
+
+    const save = async () => {
+        if (completed) {
+            return;
+        }
+
+        completed = true;
+
+        await renameConversation(
+            conversation,
+            item,
+            titleElement,
+            input
+        );
+    };
+
+    input.addEventListener(
+        "keydown",
+        (event) => {
+            if (
+                event.key ===
+                "Enter"
+            ) {
+                event.preventDefault();
+
+                save();
+            }
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+                event.preventDefault();
+
+                completed = true;
+
+                item.replaceChildren(
+                    titleElement
+                );
+            }
+        }
+    );
+
+    input.addEventListener(
+        "blur",
+        () => {
+            save();
+        }
+    );
+}
+
+
+/* ========================================
+   Delete Conversation
+======================================== */
+
+async function deleteConversation(
+    conversation
+) {
+    closeConversationMenus();
+
+    const title =
+        conversation.title ||
+        "New Conversation";
+
+    const confirmed =
+        window.confirm(
+            `Delete "${title}"?`
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+        const response =
+            await fetch(
+                `/api/chat/conversations/${conversation.id}/delete/`,
+                {
+                    method: "DELETE",
+                }
+            );
+
+        if (
+            response.status !==
+            204
+        ) {
+            const data =
+                await response.json();
+
+            throw new Error(
+                getApiError(data)
+            );
+        }
+
+        conversationListData =
+            conversationListData.filter(
+                (item) =>
+                    item.id !==
+                    conversation.id
+            );
+
+        if (
+            conversationId ===
+            conversation.id
+        ) {
+            conversationId =
+                null;
+
+            messagesContainer.innerHTML =
+                "";
+
+            messagesContainer.appendChild(
+                emptyState
+            );
+
+            updateEmptyState();
+
+            messageInput.value =
+                "";
+
+            messageInput.focus();
+        }
+
+        renderConversations(
+            conversationListData
+        );
+
+    } catch (error) {
+        console.error(
+            error
+        );
+
+        alert(
+            error.message ||
+            "Unable to delete conversation."
+        );
+    }
+}
+
+
+/* ========================================
    Conversation List
 ======================================== */
 
 function renderConversations(
     conversations
 ) {
-    /*
-     * Preserve the user's current sidebar
-     * scroll position before rebuilding the list.
-     */
     const scrollTop =
         conversationList.scrollTop;
 
@@ -857,27 +1129,154 @@ function renderConversations(
                 );
             }
 
-            const firstUserMessage =
-                conversation.messages.find(
-                    (message) =>
-                        message.role ===
-                        "user"
+            const titleElement =
+                document.createElement(
+                    "span"
                 );
 
-            const title =
-                firstUserMessage
-                    ? createConversationTitle(
-                          firstUserMessage.content
-                      )
-                    : "New chat";
+            titleElement.className =
+                "conversation-title";
 
-            item.textContent =
-                title;
+            titleElement.textContent =
+                conversation.title ||
+                "New Conversation";
 
-            item.title =
-                firstUserMessage
-                    ? firstUserMessage.content
-                    : "New chat";
+            titleElement.title =
+                conversation.title ||
+                "New Conversation";
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+            actions.className =
+                "conversation-actions";
+
+            const menuButton =
+                document.createElement(
+                    "button"
+                );
+
+            menuButton.type =
+                "button";
+
+            menuButton.className =
+                "conversation-menu-button";
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Conversation options"
+            );
+
+            menuButton.setAttribute(
+                "aria-haspopup",
+                "true"
+            );
+
+            menuButton.textContent =
+                "⋯";
+
+            const menu =
+                document.createElement(
+                    "div"
+                );
+
+            menu.className =
+                "conversation-menu";
+
+            const renameButton =
+                document.createElement(
+                    "button"
+                );
+
+            renameButton.type =
+                "button";
+
+            renameButton.className =
+                "conversation-menu-item";
+
+            renameButton.textContent =
+                "Rename";
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+            deleteButton.type =
+                "button";
+
+            deleteButton.className =
+                "conversation-menu-item delete";
+
+            deleteButton.textContent =
+                "Delete";
+
+            renameButton.addEventListener(
+                "click",
+                (event) => {
+                    event.stopPropagation();
+
+                    startRenameConversation(
+                        conversation,
+                        item
+                    );
+                }
+            );
+
+            deleteButton.addEventListener(
+                "click",
+                (event) => {
+                    event.stopPropagation();
+
+                    deleteConversation(
+                        conversation
+                    );
+                }
+            );
+
+            menuButton.addEventListener(
+                "click",
+                (event) => {
+                    event.stopPropagation();
+
+                    toggleConversationMenu(
+                        menu
+                    );
+                }
+            );
+
+            menu.addEventListener(
+                "click",
+                (event) => {
+                    event.stopPropagation();
+                }
+            );
+
+            menu.appendChild(
+                renameButton
+            );
+
+            menu.appendChild(
+                deleteButton
+            );
+
+            actions.appendChild(
+                menuButton
+            );
+
+            actions.appendChild(
+                menu
+            );
+
+            item.appendChild(
+                titleElement
+            );
+
+            item.appendChild(
+                actions
+            );
 
             item.addEventListener(
                 "click",
@@ -894,13 +1293,17 @@ function renderConversations(
         }
     );
 
-    /*
-     * Restore the previous position after
-     * the conversation items have been rebuilt.
-     */
     conversationList.scrollTop =
         scrollTop;
 }
+
+
+document.addEventListener(
+    "click",
+    () => {
+        closeConversationMenus();
+    }
+);
 
 
 /* ========================================
@@ -1017,6 +1420,8 @@ function closeSidebar() {
         return;
     }
 
+    closeConversationMenus();
+
     sidebar.classList.remove(
         "mobile-open"
     );
@@ -1066,11 +1471,6 @@ async function handleNewChat() {
         return;
     }
 
-    /*
-     * A new chat is only a local UI state.
-     * Do not create a database conversation
-     * until the user actually sends a message.
-     */
     conversationId = null;
 
     messagesContainer.innerHTML =
@@ -1155,10 +1555,6 @@ chatForm.addEventListener(
             addLoadingMessage();
 
         try {
-            /*
-             * Create the conversation only when
-             * the user actually sends a message.
-             */
             if (!conversationId) {
                 await createConversation();
             }
@@ -1214,10 +1610,6 @@ async function initializeChat() {
         conversationListData =
             conversations;
 
-        /*
-         * Load chat history into the sidebar,
-         * but do not automatically select a chat.
-         */
         conversationId =
             null;
 

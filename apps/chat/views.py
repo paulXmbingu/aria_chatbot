@@ -1,19 +1,26 @@
 import logging
+
 from typing import Any, cast
 
 from asgiref.sync import async_to_sync
+
 from django.db.models import Prefetch
+
 from rest_framework import generics, status
+
 from rest_framework.response import Response
+
 from rest_framework.views import APIView
 
 from ai.services.chat_service import ChatService
 
 from .models import Conversation, Message
+
 from .serializers import (
     ChatMessageSerializer,
     ConversationSerializer,
     RegenerateMessageSerializer,
+    RenameConversationSerializer,
 )
 
 
@@ -62,7 +69,6 @@ class ChatMessageView(APIView):
             conversation = Conversation.objects.get(
                 id=conversation_id
             )
-
         except Conversation.DoesNotExist:
             logger.warning(
                 "Conversation %s not found",
@@ -224,7 +230,7 @@ class RegenerateMessageView(APIView):
             return Response(
                 {
                     "error": (
-                        "Unable to regenerate the "
+                        "Unable to generate the "
                         "response right now."
                     )
                 },
@@ -240,4 +246,89 @@ class RegenerateMessageView(APIView):
                 "response": response,
             },
             status=status.HTTP_200_OK,
+        )
+
+
+class RenameConversationView(APIView):
+    def patch(
+        self,
+        request,
+        conversation_id,
+    ):
+        serializer = RenameConversationSerializer(
+            data=request.data
+        )
+
+        serializer.is_valid(
+            raise_exception=True
+        )
+
+        data = cast(
+            dict[str, Any],
+            serializer.validated_data,
+        )
+
+        title = data["title"]
+
+        try:
+            conversation = Conversation.objects.get(
+                id=conversation_id
+            )
+
+        except Conversation.DoesNotExist:
+            logger.warning(
+                "Conversation %s not found for rename",
+                conversation_id,
+            )
+
+            return Response(
+                {
+                    "error": "Conversation not found."
+                },
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        conversation.title = title
+
+        conversation.save(
+            update_fields=["title"]
+        )
+
+        return Response(
+            {
+                "id": conversation.pk,
+                "title": conversation.title,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
+class DeleteConversationView(APIView):
+    def delete(
+        self,
+        request,
+        conversation_id,
+    ):
+        try:
+            conversation = Conversation.objects.get(
+                id=conversation_id
+            )
+
+        except Conversation.DoesNotExist:
+            logger.warning(
+                "Conversation %s not found for deletion",
+                conversation_id,
+            )
+
+            return Response(
+                {
+                    "error": "Conversation not found."
+                },
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        conversation.delete()
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT,
         )

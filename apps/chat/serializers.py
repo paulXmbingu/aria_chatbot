@@ -41,3 +41,11 @@ class ChatMessageSerializer(serializers.Serializer):
 class RegenerateMessageSerializer(serializers.Serializer):
     conversation_id = serializers.IntegerField()
     message_id = serializers.IntegerField()
+
+
+class RenameConversationSerializer(serializers.Serializer):
+    title = serializers.CharField(
+        max_length=120,
+        allow_blank=False,
+        trim_whitespace=True,
+    )
