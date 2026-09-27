@@ -6,17 +6,32 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
+
     <title>Aria Chat</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/static/assets/logos/favicon.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
 </head>
+
 <body>
     <div class="app">
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="mobile-sidebar-header">
                     <div class="brand">
-                        <span class="brand-mark">A</span>
-                        <span>Aria Chat</span>
+                        <img
+                            class="logo"
+                            src="/static/assets/logos/logo.png"
+                            alt="Aria Chat"
+                        >
                     </div>
 
                     <button
@@ -30,17 +45,25 @@
                 </div>
 
                 <div class="brand desktop-brand">
-                    <span class="brand-mark">A</span>
-                    <span>Aria Chat</span>
+                    <img
+                        class="logo"
+                        src="/static/assets/logos/logo.png"
+                        alt="Aria Chat"
+                    >
                 </div>
 
-                <button id="new-chat-btn" type="button">
+                <button
+                    id="new-chat-btn"
+                    type="button"
+                >
                     New chat
                 </button>
             </div>
 
             <div class="conversation-section">
-                <div class="section-label">Chats</div>
+                <div class="section-label">
+                    Chats
+                </div>
 
                 <div
                     id="conversation-list"
@@ -52,11 +75,11 @@
 
             <div class="sidebar-footer">
                 <div class="user-profile">
-                    <div
-                        class="user-avatar"
-                        aria-hidden="true"
-                    >
-                        PM
+                    <div class="user-avatar">
+                        <img
+                            src="/static/assets/media/paul-mbingu.jpg"
+                            alt="Paul Mbingu"
+                        >
                     </div>
 
                     <span>Paul Mbingu</span>
@@ -81,7 +104,11 @@
                 </button>
 
                 <div class="mobile-chat-brand">
-                    Aria Chat
+                    <img
+                        class="logo"
+                        src="/static/assets/logos/logo.png"
+                        alt="Aria Chat"
+                    >
                 </div>
 
                 <button
@@ -102,7 +129,11 @@
                     id="empty-state"
                     class="empty-state"
                 >
-                    <div class="empty-state-mark">A</div>
+                    <img
+                        class="empty-state-mark"
+                        src="/static/assets/logos/logo-mark.png"
+                        alt="Aria Chat"
+                    >
 
                     <h1>
                         How can I help you today?
