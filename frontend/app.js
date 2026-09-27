@@ -55,6 +55,7 @@ let isLoading = false;
 marked.setOptions({
     gfm: true,
     breaks: true,
+    pedantic: false,
 });
 
 
@@ -78,6 +79,15 @@ marked.use({
         },
     },
 });
+
+
+function renderMarkdown(content) {
+    if (!content) {
+        return "";
+    }
+
+    return marked.parse(content);
+}
 
 
 /* ========================================
@@ -167,7 +177,7 @@ function enhanceCodeBlocks(
 
             const language =
                 codeBlock.className.match(
-                    /language-(\w+)/
+                    /language-([\w-]+)/
                 );
 
             const languageLabel =
@@ -303,7 +313,7 @@ function addMessage(
 
     if (role === "assistant") {
         messageContent.innerHTML =
-            marked.parse(content);
+            renderMarkdown(content);
 
         enhanceCodeBlocks(
             messageContent
@@ -527,7 +537,7 @@ async function regenerateResponse(
         }
 
         originalContent.innerHTML =
-            marked.parse(
+            renderMarkdown(
                 data.response
             );
 
