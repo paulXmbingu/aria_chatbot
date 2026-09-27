@@ -1,5 +1,8 @@
 from asgiref.sync import sync_to_async
 
+from ai.memory.memory_context_service import (
+    MemoryContextService,
+)
 from ai.services.context import Context
 from apps.chat.models import Conversation, Message
 
@@ -79,6 +82,10 @@ class ConversationContextService:
             )
         )
 
+        memory_context = MemoryContextService()
+
+        memories = await memory_context.build()
+
         return Context(
             conversation_id=conversation.pk,
             history=history,
@@ -90,4 +97,5 @@ class ConversationContextService:
                 else ""
             ),
             intent=intent,
+            memories=memories,
         )

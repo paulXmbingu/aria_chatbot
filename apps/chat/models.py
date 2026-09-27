@@ -30,3 +30,32 @@ class Message(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True,
     )
+
+
+class Memory(models.Model):
+    MEMORY_TYPE_CHOICES = [
+        ("PREFERENCE", "Preference"),
+        ("USER_FACT", "User Fact"),
+        ("PROJECT_CONTEXT", "Project Context"),
+        ("INSTRUCTION", "Instruction"),
+    ]
+
+    type = models.CharField(
+        max_length=30,
+        choices=MEMORY_TYPE_CHOICES,
+    )
+    content = models.TextField()
+    confidence = models.FloatField(
+        default=1.0,
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+    )
+
+    class Meta:
+        ordering = [
+            "-updated_at",
+        ]

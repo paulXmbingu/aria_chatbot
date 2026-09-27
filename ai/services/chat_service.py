@@ -1,5 +1,6 @@
 from asgiref.sync import sync_to_async
 
+from ai.memory.memory_manager import MemoryManager
 from ai.services.ai_service import AIService
 from ai.services.context_prompt_service import (
     ContextPromptService,
@@ -11,6 +12,9 @@ from ai.services.conversation_title_service import (
     ConversationTitleService,
 )
 from ai.services.intent_service import IntentService
+from ai.services.response_planning_service import (
+    ResponsePlanningService,
+)
 from apps.chat.models import Conversation, Message
 
 
@@ -24,14 +28,8 @@ class ChatService:
             message
         )
 
-        context = await ConversationContextService.build(
-            conversation=conversation,
-            current_message=message,
-            intent=intent,
-        )
-
-        prompt = ContextPromptService.build(
-            context
+        plan = await ResponsePlanningService.plan(
+            message
         )
 
         user_message = await sync_to_async(
@@ -40,6 +38,23 @@ class ChatService:
             conversation=conversation,
             role="user",
             content=message,
+        )
+
+        memory_manager = MemoryManager()
+
+        await memory_manager.process(
+            message
+        )
+
+        context = await ConversationContextService.build(
+            conversation=conversation,
+            current_message=message,
+            intent=intent,
+        )
+
+        prompt = ContextPromptService.build(
+            context,
+            plan=plan,
         )
 
         response = await AIService.generate(
@@ -131,6 +146,10 @@ class ChatService:
             user_message.content
         )
 
+        plan = await ResponsePlanningService.plan(
+            user_message.content
+        )
+
         context = await ConversationContextService.build(
             conversation=conversation,
             current_message=user_message.content,
@@ -140,7 +159,8 @@ class ChatService:
         )
 
         prompt = ContextPromptService.build(
-            context
+            context,
+            plan=plan,
         )
 
         response = await AIService.generate(

@@ -8,3 +8,4 @@ class Context:
     recent_messages: list[str]
     current_message: str
     intent: str | None = None
+    memories: list[str] | None = None
