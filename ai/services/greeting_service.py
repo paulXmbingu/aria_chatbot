@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 
 from ai.services.ai_service import AIService
 
@@ -21,39 +22,32 @@ class GreetingService:
         else:
             time_period = "late night"
 
+        variation = random.randint(1, 1000000)
+
         return f"""
-You are generating the welcome text displayed on the Aria Chat home screen.
+Generate a short welcome message for Aria Chat.
 
 Time of day: {time_period}
+Variation seed: {variation}
 
 Return ONLY the welcome message.
 
-STRICT RULES:
+Rules:
+- 4 to 6 words.
 - One sentence only.
-- 4 to 8 words.
-- Friendly and natural.
-- Make it clear that Aria is ready to help.
-- Keep it concise.
-- No explanations.
-- No introduction.
-- No labels.
+- Natural and conversational.
+- Make Aria sound ready to help.
+- Vary the wording every time.
+- Avoid common repeated phrases.
+- Do not explain anything.
 - No Markdown.
 - No quotation marks.
 - No emojis.
 - No questions.
-- Do not say "Here is".
-- Do not say "welcome message".
-- Do not provide examples.
-- Do not provide additional text.
+- No labels.
+- No additional text.
 
-Good examples:
-Good morning, ready to help.
-Good afternoon, ready to help.
-Good evening, ready to help.
-I'm ready to help.
-Ready to help you get started.
-
-Return ONLY the final sentence.
+Return only the final greeting.
 """.strip()
 
     @staticmethod
