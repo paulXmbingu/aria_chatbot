@@ -47,7 +47,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+
     "whitenoise.middleware.WhiteNoiseMiddleware",
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -88,11 +90,26 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "aria_chatbot",
-        "USER": "paulmbingu",
-        "PASSWORD": "",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": os.getenv(
+            "POSTGRES_DB",
+            "aria_chatbot",
+        ),
+        "USER": os.getenv(
+            "POSTGRES_USER",
+            "paulmbingu",
+        ),
+        "PASSWORD": os.getenv(
+            "POSTGRES_PASSWORD",
+            "",
+        ),
+        "HOST": os.getenv(
+            "POSTGRES_HOST",
+            "localhost",
+        ),
+        "PORT": os.getenv(
+            "POSTGRES_PORT",
+            "5432",
+        ),
     }
 }
 
@@ -131,6 +148,20 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "frontend",
 ]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+STORAGES = {
+    "default": {
+        "BACKEND":
+            "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND":
+            "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 MAILERS = {
@@ -174,16 +205,5 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
-    },
-}
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
