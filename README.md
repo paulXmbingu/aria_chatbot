@@ -1,5 +1,5 @@
 # AriaChat
-![AriaChat Demo](https://res.cloudinary.com/excit3/video/upload/v1774048209/18069232-hd_1920_1080_24fps_lbcxk8.mp4)
+![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
 
 AriaChat is a case study exploring how **intelligent capabilities can be integrated into future Excite! Innovation products**, with a focus on AI integration, developer productivity, and Backend–AI/ML collaboration.
 
@@ -21,7 +21,6 @@ AriaChat demonstrates practical conversational AI capabilities, including natura
 The core principle was to establish a **modular architecture and project structure**, keeping the frontend, backend, and AI components clearly separated.
 
 AriaChat connects the frontend, Django API, AI services, Google ADK, Ollama, and Llama 3.2 3B in distinct layers, making the system easier to develop, maintain, and evolve.
-![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
 
 ### Outcomes & Next Steps
 
