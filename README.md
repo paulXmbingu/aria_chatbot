@@ -29,7 +29,7 @@ Progressively integrate the research findings into **Boltshift’s customer expe
 # Test the Project on Your Machine
 Follow the setup below to run AriaChat locally. Note: The local AI model can be computationally demanding.
 
-## Docker Setup
+### Docker Setup
 
 - Download and install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
 
@@ -43,7 +43,7 @@ http://localhost:8000
 ```
 
 
-## uv Setup
+### uv Setup
 
 - Download and install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
 
