@@ -26,7 +26,8 @@ AriaChat connects the frontend, Django API, AI services, Google ADK, Ollama, and
 Progressively integrate the research findings into **Boltshift’s customer experience and vendor back office**, introducing AI-powered features as product and engineering teams establish the required **data hygiene, quality, and readiness** throughout the roadmap.
 
 
-# Test the project on your machine
+# Test the Project on Your Machine
+Follow the setup below to run AriaChat locally. Note: The local AI model can be computationally demanding.
 
 ## Docker Setup
 
