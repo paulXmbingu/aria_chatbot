@@ -16,6 +16,11 @@ const sendButton =
 const newChatButton =
     document.getElementById("new-chat-btn");
 
+const collapsedNewChatButton =
+    document.getElementById(
+        "collapsed-new-chat-btn"
+    );
+
 const conversationList =
     document.getElementById("conversation-list");
 
@@ -32,6 +37,16 @@ const openSidebarButton =
 const closeSidebarButton =
     document.getElementById(
         "close-sidebar-btn"
+    );
+
+const collapseSidebarButton =
+    document.getElementById(
+        "collapse-sidebar-btn"
+    );
+
+const expandSidebarButton =
+    document.getElementById(
+        "expand-sidebar-btn"
     );
 
 const sidebar =
@@ -87,51 +102,6 @@ function renderMarkdown(content) {
     }
 
     return marked.parse(content);
-}
-
-
-/* ========================================
-   Greeting
-======================================== */
-
-async function loadGreeting() {
-    try {
-        const response =
-            await fetch(
-                "/api/chat/greeting/"
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-            throw new Error(
-                getApiError(data)
-            );
-        }
-
-        const greetingElement =
-            Array.from(
-                emptyState.querySelectorAll("*")
-            ).find(
-                (element) =>
-                    element.textContent.trim() ===
-                    "How can I help you today?"
-            );
-
-        if (
-            greetingElement &&
-            data.greeting
-        ) {
-            greetingElement.textContent =
-                data.greeting;
-        }
-    } catch (error) {
-        console.error(
-            "Failed to load greeting:",
-            error
-        );
-    }
 }
 
 
@@ -727,6 +697,11 @@ function setLoading(
 
     newChatButton.disabled =
         loading;
+
+    if (collapsedNewChatButton) {
+        collapsedNewChatButton.disabled =
+            loading;
+    }
 
     sendButton.disabled =
         loading;
@@ -1483,6 +1458,91 @@ function closeSidebar() {
 }
 
 
+function setSidebarCollapsed(
+    collapsed
+) {
+    if (!sidebar) {
+        return;
+    }
+
+    if (
+        window.matchMedia(
+            "(max-width: 700px)"
+        ).matches
+    ) {
+        return;
+    }
+
+    sidebar.classList.toggle(
+        "collapsed",
+        collapsed
+    );
+
+    localStorage.setItem(
+        "aria-sidebar-collapsed",
+        collapsed ? "true" : "false"
+    );
+
+    closeConversationMenus();
+}
+
+
+function restoreSidebarState() {
+    if (!sidebar) {
+        return;
+    }
+
+    if (
+        window.matchMedia(
+            "(max-width: 700px)"
+        ).matches
+    ) {
+        return;
+    }
+
+    const isCollapsed =
+        localStorage.getItem(
+            "aria-sidebar-collapsed"
+        ) === "true";
+
+    if (!isCollapsed) {
+        return;
+    }
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            sidebar.classList.add(
+                "collapsed"
+            );
+        });
+    });
+}
+
+
+function toggleSidebarCollapse() {
+    if (!sidebar) {
+        return;
+    }
+
+    if (
+        window.matchMedia(
+            "(max-width: 700px)"
+        ).matches
+    ) {
+        return;
+    }
+
+    const isCollapsed =
+        sidebar.classList.contains(
+            "collapsed"
+        );
+
+    setSidebarCollapsed(
+        !isCollapsed
+    );
+}
+
+
 if (openSidebarButton) {
     openSidebarButton.addEventListener(
         "click",
@@ -1503,6 +1563,22 @@ if (sidebarOverlay) {
     sidebarOverlay.addEventListener(
         "click",
         closeSidebar
+    );
+}
+
+
+if (collapseSidebarButton) {
+    collapseSidebarButton.addEventListener(
+        "click",
+        toggleSidebarCollapse
+    );
+}
+
+
+if (expandSidebarButton) {
+    expandSidebarButton.addEventListener(
+        "click",
+        toggleSidebarCollapse
     );
 }
 
@@ -1537,6 +1613,14 @@ newChatButton.addEventListener(
     "click",
     handleNewChat
 );
+
+
+if (collapsedNewChatButton) {
+    collapsedNewChatButton.addEventListener(
+        "click",
+        handleNewChat
+    );
+}
 
 
 if (mobileNewChatButton) {
@@ -1644,8 +1728,49 @@ chatForm.addEventListener(
 
 
 /* ========================================
+   Dynamic Greeting
+======================================== */
+
+async function loadGreeting() {
+    try {
+        const response =
+            await fetch(
+                "/api/chat/greeting/"
+            );
+
+        if (!response.ok) {
+            return;
+        }
+
+        const data =
+            await response.json();
+
+        const greetingElement =
+            document.querySelector(
+                "#empty-state h1"
+            );
+
+        if (
+            greetingElement &&
+            data.greeting
+        ) {
+            greetingElement.textContent =
+                data.greeting;
+        }
+    } catch (error) {
+        console.error(
+            "Failed to load greeting:",
+            error
+        );
+    }
+}
+
+
+/* ========================================
    Initialization
 ======================================== */
+
+restoreSidebarState();
 
 async function initializeChat() {
     try {
@@ -1684,7 +1809,7 @@ async function initializeChat() {
 
     messageInput.focus();
 
-    loadGreeting();
+    await loadGreeting();
 }
 
 
