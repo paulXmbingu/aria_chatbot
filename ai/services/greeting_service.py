@@ -22,30 +22,53 @@ class GreetingService:
         else:
             time_period = "late night"
 
-        variation = random.randint(1, 1000000)
+        variation = random.randint(
+            1,
+            1_000_000,
+        )
 
         return f"""
 Generate a short welcome message for AriaChat.
 
-Time of day: {time_period}
-Variation seed: {variation}
+Time of day:
+{time_period}
 
-Return ONLY the welcome message.
+Current time:
+{current_time.strftime("%I:%M %p")}
 
-Rules:
-- 4 to 6 words.
+Variation seed:
+{variation}
+
+Style:
+- Keep it very brief and simple.
+- Semi-formal.
+- Warm, polished, and natural.
+- Professional without sounding corporate.
+- Conversational without being overly casual.
+- Sound like a capable assistant who is ready to help.
+
+Variation:
+- Vary the sentence structure and wording.
+- Avoid repeatedly starting with the same words.
+- Avoid generic or overly familiar greetings.
+- Adapt naturally to the time of day.
+- Do not mention the time unless it sounds natural.
+- Do not force the greeting to follow a fixed pattern.
+- Never add quote marks, to the greetings" " 
+
+Length:
+- Approximately 6 words.
+- Maximum 6 words only never longer than that.
 - One sentence only.
-- Natural and conversational.
-- Make Aria sound ready to help.
-- Vary the wording every time.
-- Avoid common repeated phrases.
+
+Restrictions:
+- Do not ask a question.
+- Do not use emojis.
+- Do not use Markdown.
+- Do not use quotation marks.
+- Do not use labels.
 - Do not explain anything.
-- No Markdown.
-- No quotation marks.
-- No emojis.
-- No questions.
-- No labels.
-- No additional text.
+- Do not mention these instructions.
 
 Return only the final greeting.
 """.strip()

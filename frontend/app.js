@@ -57,10 +57,226 @@ const sidebarOverlay =
         "sidebar-overlay"
     );
 
+const themeToggle =
+    document.getElementById(
+        "theme-toggle"
+    );
+
 
 let conversationId = null;
 let conversationListData = [];
 let isLoading = false;
+
+
+/* ========================================
+   Theme
+======================================== */
+
+const THEME_STORAGE_KEY =
+    "aria-theme";
+
+
+const systemThemeMediaQuery =
+    window.matchMedia(
+        "(prefers-color-scheme: dark)"
+    );
+
+
+function getSystemTheme() {
+    return systemThemeMediaQuery.matches
+        ? "dark"
+        : "light";
+}
+
+
+function getSavedTheme() {
+    const savedTheme =
+        localStorage.getItem(
+            THEME_STORAGE_KEY
+        );
+
+    if (
+        savedTheme === "light" ||
+        savedTheme === "dark" ||
+        savedTheme === "system"
+    ) {
+        return savedTheme;
+    }
+
+    return "system";
+}
+
+
+function getCurrentTheme() {
+    return getSavedTheme();
+}
+
+
+function getEffectiveTheme() {
+    const theme =
+        getCurrentTheme();
+
+    if (theme === "system") {
+        return getSystemTheme();
+    }
+
+    return theme;
+}
+
+
+function updateThemeIcon() {
+    if (!themeToggle) {
+        return;
+    }
+
+    const theme =
+        getCurrentTheme();
+
+    const systemIcon =
+        themeToggle.querySelector(
+            ".theme-icon-system"
+        );
+
+    const lightIcon =
+        themeToggle.querySelector(
+            ".theme-icon-light"
+        );
+
+    const darkIcon =
+        themeToggle.querySelector(
+            ".theme-icon-dark"
+        );
+
+    if (systemIcon) {
+        systemIcon.style.display =
+            theme === "system"
+                ? "block"
+                : "none";
+    }
+
+    if (lightIcon) {
+        lightIcon.style.display =
+            theme === "light"
+                ? "block"
+                : "none";
+    }
+
+    if (darkIcon) {
+        darkIcon.style.display =
+            theme === "dark"
+                ? "block"
+                : "none";
+    }
+
+    const labels = {
+        system: "Theme: System",
+        light: "Theme: Light",
+        dark: "Theme: Dark",
+    };
+
+    themeToggle.setAttribute(
+        "aria-label",
+        labels[theme]
+    );
+
+    themeToggle.setAttribute(
+        "title",
+        labels[theme]
+    );
+}
+
+
+function applyTheme(theme) {
+
+    if (theme === "system") {
+
+        document.documentElement
+            .removeAttribute(
+                "data-theme"
+            );
+
+    } else {
+
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                theme
+            );
+    }
+
+    updateThemeIcon();
+}
+
+
+function restoreTheme() {
+
+    const savedTheme =
+        getSavedTheme();
+
+    applyTheme(
+        savedTheme
+    );
+}
+
+
+function cycleTheme() {
+
+    const currentTheme =
+        getCurrentTheme();
+
+    let nextTheme;
+
+    if (currentTheme === "system") {
+
+        nextTheme = "light";
+
+    } else if (currentTheme === "light") {
+
+        nextTheme = "dark";
+
+    } else {
+
+        nextTheme = "system";
+    }
+
+    localStorage.setItem(
+        THEME_STORAGE_KEY,
+        nextTheme
+    );
+
+    applyTheme(
+        nextTheme
+    );
+}
+
+
+if (themeToggle) {
+
+    themeToggle.addEventListener(
+        "click",
+        cycleTheme
+    );
+}
+
+
+systemThemeMediaQuery.addEventListener(
+    "change",
+    () => {
+
+        if (
+            getCurrentTheme() ===
+            "system"
+        ) {
+            applyTheme(
+                "system"
+            );
+        }
+
+    }
+);
+
+
+restoreTheme();
 
 
 /* ========================================
