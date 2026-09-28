@@ -20,11 +20,13 @@ AriaChat demonstrates practical conversational AI capabilities, including natura
 The core principle was to establish a **modular architecture and project structure**, keeping the frontend, backend, and AI components clearly separated.
 
 AriaChat connects the frontend, Django API, AI services, Google ADK, Ollama, and Llama 3.2 3B in distinct layers, making the system easier to develop, maintain, and evolve.
-![AriaChat System Architecture](docs/aria_chat_architecture.png)
+![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
 
 ### Outcomes & Next Steps
 
 Progressively integrate the research findings into **Boltshift’s customer experience and vendor back office**, introducing AI-powered features as product and engineering teams establish the required **data hygiene, quality, and readiness** throughout the roadmap.
+![Boltshift Screeshot](https://res.cloudinary.com/excit3/image/upload/v1716852270/Boltshift%20Branding/Boltshift_Marketplace_Product_Cover_Artwork_viisbm.png)
+
 
 
 # Test the Project on Your Machine
