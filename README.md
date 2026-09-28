@@ -31,8 +31,8 @@ Follow the setup below to run AriaChat locally. Note: The local AI model can be 
 
 ## Docker Setup
 
-Download and install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
-Run AriaChat locally with Docker
+- Download and install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
+- Run AriaChat locally with Docker
 
 ```bash
 git clone https://github.com/paulXmbingu/aria_chatbot
@@ -44,8 +44,8 @@ http://localhost:8000
 
 ## uv Setup
 
-Download and install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
-Install dependencies with uv
+- Download and install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
+- Install dependencies with uv
 
 ```bash
 uv sync
