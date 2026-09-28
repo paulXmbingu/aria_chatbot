@@ -27,7 +27,9 @@ DEBUG = (
 )
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "ariachat.up.railway.app",
+]
 
 
 INSTALLED_APPS = [
