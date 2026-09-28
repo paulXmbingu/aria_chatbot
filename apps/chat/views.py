@@ -332,3 +332,31 @@ class DeleteConversationView(APIView):
         return Response(
             status=status.HTTP_204_NO_CONTENT,
         )
+
+
+class GreetingView(APIView):
+    def get(self, request):
+        from datetime import datetime
+
+        from ai.services.greeting_service import GreetingService
+
+        greeting = async_to_sync(
+            GreetingService.generate
+        )(
+            datetime.now(),
+        )
+
+        if not greeting:
+            return Response(
+                {
+                    "error": "Unable to generate greeting."
+                },
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+
+        return Response(
+            {
+                "greeting": greeting,
+            },
+            status=status.HTTP_200_OK,
+        )

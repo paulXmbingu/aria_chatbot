@@ -4,6 +4,7 @@ from .views import (
     ChatMessageView,
     ConversationListCreateView,
     DeleteConversationView,
+    GreetingView,
     RegenerateMessageView,
     RenameConversationView,
 )
@@ -29,5 +30,9 @@ urlpatterns = [
     path(
         "regenerate/",
         RegenerateMessageView.as_view(),
+    ),
+    path(
+    "greeting/",
+    GreetingView.as_view(),
     ),
 ]

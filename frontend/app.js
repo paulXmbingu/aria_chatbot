@@ -91,6 +91,51 @@ function renderMarkdown(content) {
 
 
 /* ========================================
+   Greeting
+======================================== */
+
+async function loadGreeting() {
+    try {
+        const response =
+            await fetch(
+                "/api/chat/greeting/"
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                getApiError(data)
+            );
+        }
+
+        const greetingElement =
+            Array.from(
+                emptyState.querySelectorAll("*")
+            ).find(
+                (element) =>
+                    element.textContent.trim() ===
+                    "How can I help you today?"
+            );
+
+        if (
+            greetingElement &&
+            data.greeting
+        ) {
+            greetingElement.textContent =
+                data.greeting;
+        }
+    } catch (error) {
+        console.error(
+            "Failed to load greeting:",
+            error
+        );
+    }
+}
+
+
+/* ========================================
    API Errors
 ======================================== */
 
@@ -1638,6 +1683,8 @@ async function initializeChat() {
     }
 
     messageInput.focus();
+
+    loadGreeting();
 }
 
 
