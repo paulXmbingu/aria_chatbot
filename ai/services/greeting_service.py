@@ -25,7 +25,7 @@ class GreetingService:
         variation = random.randint(1, 1000000)
 
         return f"""
-Generate a short welcome message for Aria Chat.
+Generate a short welcome message for AriaChat.
 
 Time of day: {time_period}
 Variation seed: {variation}
