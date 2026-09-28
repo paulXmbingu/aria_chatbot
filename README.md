@@ -1,4 +1,5 @@
 # AriaChat
+![AriaChat Demo](https://res.cloudinary.com/excit3/video/upload/v1774048209/18069232-hd_1920_1080_24fps_lbcxk8.mp4)
 
 AriaChat is a case study exploring how **intelligent capabilities can be integrated into future Excite! Innovation products**, with a focus on AI integration, developer productivity, and Backend–AI/ML collaboration.
 
