@@ -25,9 +25,7 @@ AriaChat connects the frontend, Django API, AI services, Google ADK, Ollama, and
 
 ### Outcomes & Next Steps
 
-Progressively integrate the research findings into **Boltshift’s customer experience and vendor back office**, introducing AI-powered features as product and engineering teams establish the required **data hygiene, quality, and readiness** throughout the roadmap.
-![Boltshift Screeshot](https://res.cloudinary.com/excit3/image/upload/v1716852270/Boltshift%20Branding/Boltshift_Marketplace_Product_Cover_Artwork_viisbm.png)
-
+Progressively integrate the research findings into [**Boltshift’s customer experience and vendor back office**](https://boltshift.vercel.app/), introducing AI-powered features as product and engineering teams establish the required **data hygiene, quality, and readiness** throughout the roadmap.
 
 
 # Test the Project on Your Machine
