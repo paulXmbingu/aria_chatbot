@@ -1,7 +1,6 @@
 # AriaChat
+AriaChat is a research case study exploring how **intelligent capabilities can be integrated into future Excite! Innovation products**, with a focus on AI integration, developer productivity, and Backend–AI/ML collaboration.
 ![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
-
-AriaChat is a case study exploring how **intelligent capabilities can be integrated into future Excite! Innovation products**, with a focus on AI integration, developer productivity, and Backend–AI/ML collaboration.
 
 ### Case Study Focus
 
