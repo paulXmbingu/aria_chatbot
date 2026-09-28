@@ -26,10 +26,12 @@ AriaChat connects the frontend, Django API, AI services, Google ADK, Ollama, and
 Progressively integrate the research findings into **Boltshift’s customer experience and vendor back office**, introducing AI-powered features as product and engineering teams establish the required **data hygiene, quality, and readiness** throughout the roadmap.
 
 
+# Test the project on your machine
+
 ## Docker Setup
 
 Run AriaChat locally with Docker:
-Download and install **Docker Desktop** → [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+Download and install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
 
 ```bash
 git clone https://github.com/paulXmbingu/aria_chatbot
@@ -39,11 +41,10 @@ http://localhost:8000
 ```
 
 
-
 ## uv Setup
 
 Install dependencies with **uv**:
-Download and install uv → https://docs.astral.sh/uv/getting-started/installation/
+Download and install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
 
 ```bash
 uv sync
