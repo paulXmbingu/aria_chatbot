@@ -29,6 +29,7 @@ Progressively integrate the research findings into **Boltshift’s customer expe
 ## Docker Setup
 
 Run AriaChat locally with Docker:
+Download **Docker Desktop** → [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
 
 ```bash
 git clone https://github.com/paulXmbingu/aria_chatbot
@@ -42,11 +43,11 @@ Then open:
 http://localhost:8000
 ```
 
-Requires **Docker Desktop** → [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
 
 ## uv Setup
 
 Install dependencies with **uv**:
+Requires uv → https://docs.astral.sh/uv/getting-started/installation/
 
 ```bash
 uv sync
@@ -59,5 +60,3 @@ Then open:
 ```text
 http://localhost:8000
 ```
-
-Requires **uv** → [https://docs.astral.sh/uv/](https://docs.astral.sh/uv/)
