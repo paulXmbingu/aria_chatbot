@@ -29,8 +29,7 @@ Progressively integrate the research findings into [**Boltshift’s customer exp
 # Test the Project on Your Machine
 Follow the setup below to run AriaChat locally. Download and install [**Ollama**](https://ollama.com/)
 
-### Docker Setup
-- Download and install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
+### Docker Setup: Install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
 
 ```bash
 git clone https://github.com/paulXmbingu/aria_chatbot
@@ -40,8 +39,7 @@ http://localhost:8000
 ```
 
 
-### uv Setup
-- Download and install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
+### uv Setup: Install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
 
 ```bash
 uv sync
