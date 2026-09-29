@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+from dj_database_url import config
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,14 +84,9 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "aria_chatbot",
-        "USER": "paulmbingu",
-        "PASSWORD": "",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    "default": config(
+        default="postgresql://localhost/aria_chatbot"
+    )
 }
 
 
