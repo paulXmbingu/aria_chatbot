@@ -19,7 +19,7 @@ AriaChat demonstrates practical conversational AI capabilities, including natura
 
 ### System Architecture & Project Structure
 
-The core principle was to establish a **modular architecture and project structure**, keeping the frontend, backend, and AI components clearly separated. AriaChat connects the frontend, Django API, AI services, Google ADK, Ollama, and Llama 3.2 3B in distinct layers, making the system easier to develop, maintain, and evolve.
+The core principle was to establish a **modular architecture and project structure**, keeping the frontend, backend, and AI components clearly separated.
 
 ### Outcomes & Next Steps
 
