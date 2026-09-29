@@ -22,10 +22,8 @@ Progressively integrate the research findings into [**Boltshift’s customer exp
 
 
 # Test the Project locally
-Follow the setup below to run AriaChat on your machine.
 
-### Docker Setup: Install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
-
+- Download & Install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
 - Clone & open the repo.
 
 ```bash
