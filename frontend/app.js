@@ -1928,6 +1928,38 @@ async function handleNewChat() {
         return;
     }
 
+    const currentConversation =
+        conversationListData.find(
+            (conversation) =>
+                conversation.id ===
+                conversationId
+        );
+
+    const hasMessages =
+        currentConversation &&
+        currentConversation.messages &&
+        currentConversation.messages.length > 0;
+
+    if (
+        currentConversation &&
+        !hasMessages
+    ) {
+        messagesContainer.innerHTML =
+            "";
+
+        messagesContainer.appendChild(
+            emptyState
+        );
+
+        updateEmptyState();
+
+        closeSidebar();
+
+        messageInput.focus();
+
+        return;
+    }
+
     try {
         const conversation =
             await createConversation();
