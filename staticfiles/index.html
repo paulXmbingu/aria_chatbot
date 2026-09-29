@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <title>AriaChat</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/static/assets/logos/favicon.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+</head>
+
+<body>
+
+    <div class="app">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+
+                <div class="mobile-sidebar-header">
+
+                    <div class="brand">
+
+                        <img
+                            class="logo-mark"
+                            src="/static/assets/logos/logo-mark.png"
+                            alt=""
+                        >
+
+                        <span class="brand-name">
+                            AriaChat
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="close-sidebar-btn"
+                        class="mobile-sidebar-close"
+                        type="button"
+                        aria-label="Close sidebar"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div class="desktop-sidebar-header">
+
+                    <div class="desktop-brand-row">
+
+                        <div class="brand desktop-brand">
+
+                            <img
+                                class="logo-mark"
+                                src="/static/assets/logos/logo-mark.png"
+                                alt=""
+                            >
+
+                            <span class="brand-name">
+                                AriaChat
+                            </span>
+
+                        </div>
+
+                        <button
+                            id="collapse-sidebar-btn"
+                            class="sidebar-icon-button collapse-sidebar-button"
+                            type="button"
+                            aria-label="Collapse sidebar"
+                            title="Collapse sidebar"
+                        >
+                            <i data-lucide="panel-left-close"></i>
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        id="new-chat-btn"
+                        type="button"
+                        class="new-chat-button"
+                    >
+
+                        <i data-lucide="square-pen"></i>
+
+                        <span>
+                            New chat
+                        </span>
+
+                    </button>
+
+
+                    <div class="collapsed-sidebar-actions">
+
+                        <button
+                            id="expand-sidebar-btn"
+                            class="sidebar-icon-button"
+                            type="button"
+                            aria-label="Expand sidebar"
+                            title="Expand sidebar"
+                        >
+                            <i data-lucide="panel-left-open"></i>
+                        </button>
+
+                        <button
+                            id="collapsed-new-chat-btn"
+                            class="sidebar-icon-button"
+                            type="button"
+                            aria-label="New chat"
+                            title="New chat"
+                        >
+                            <i data-lucide="square-pen"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="conversation-section">
+
+                <div class="section-label">
+                    Chats
+                </div>
+
+                <div
+                    id="conversation-list"
+                    class="conversation-list"
+                >
+                    <!-- Conversations will appear here -->
+                </div>
+
+            </div>
+
+
+            <div class="sidebar-footer">
+
+                <div class="user-profile">
+
+                    <div class="user-avatar">
+
+                        <img
+                            src="/static/assets/media/paul-mbingu.jpg"
+                            alt="Paul Mbingu"
+                        >
+
+                    </div>
+
+                    <span>
+                        Paul Mbingu
+                    </span>
+
+                </div>
+
+
+                <button
+                    id="theme-toggle"
+                    class="theme-toggle"
+                    type="button"
+                    aria-label="Theme: System"
+                    title="Theme: System"
+                >
+
+                    <i
+                        data-lucide="sun-moon"
+                        class="theme-icon theme-icon-system"
+                    ></i>
+
+                    <i
+                        data-lucide="moon"
+                        class="theme-icon theme-icon-light"
+                    ></i>
+
+                    <i
+                        data-lucide="sun"
+                        class="theme-icon theme-icon-dark"
+                    ></i>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <div
+            id="sidebar-overlay"
+            class="sidebar-overlay"
+        ></div>
+
+
+        <main class="chat">
+
+            <div class="mobile-chat-header">
+
+                <div class="mobile-chat-leading">
+
+                    <button
+                        id="open-sidebar-btn"
+                        class="mobile-menu-button"
+                        type="button"
+                        aria-label="Open sidebar"
+                    >
+                        <i data-lucide="menu"></i>
+                    </button>
+
+
+                    <div class="mobile-chat-brand">
+
+                        <img
+                            class="logo-mark"
+                            src="/static/assets/logos/logo-mark.png"
+                            alt=""
+                        >
+
+                        <span class="mobile-chat-brand-name">
+                            AriaChat
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="mobile-new-chat-btn"
+                    class="mobile-new-chat-button"
+                    type="button"
+                    aria-label="New chat"
+                >
+                    <i data-lucide="square-pen"></i>
+                </button>
+
+            </div>
+
+
+            <section
+                id="messages"
+                class="messages"
+            >
+
+                <div
+                    id="empty-state"
+                    class="empty-state"
+                >
+
+                    <img
+                        class="empty-state-mark"
+                        src="/static/assets/logos/logo-mark.png"
+                        alt="AriaChat"
+                    >
+
+                    <h1>
+                        How can I help you today?
+                    </h1>
+
+                    <p>
+                        Ask me anything, explain a concept,
+                        write some code, or explore an idea.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <div class="composer-container">
+
+                <div class="composer-disclaimer">
+                    © 2026 Paul Mbingu. Thanks to Aria, Marion & Mercy Mbingu.
+                </div>
+
+                <form
+                    id="chat-form"
+                    class="composer"
+                >
+
+                    <input
+                        id="message-input"
+                        type="text"
+                        placeholder="Ask Aria anything ..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        id="send-btn"
+                        type="submit"
+                        aria-label="Send message"
+                    >
+                        ↑
+                    </button>
+
+                </form>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- Local JavaScript dependencies -->
+
+    <script src="/static/vendor/marked.min.js"></script>
+
+    <script src="/static/vendor/lucide.min.js"></script>
+
+    <script src="/static/vendor/prism.min.js"></script>
+
+
+    <script>
+        if (typeof lucide !== "undefined") {
+            lucide.createIcons();
+        }
+    </script>
+
+
+    <script src="/static/app.js"></script>
+
+</body>
+</html>
