@@ -27,9 +27,7 @@ Progressively integrate the research findings into [**Boltshift’s customer exp
 
 
 # Test the Project on Your Machine
-Follow the setup below to run AriaChat locally. Note: The local AI model can be computationally demanding.
-- Download and install [**Ollama**](https://ollama.com/)
-
+Follow the setup below to run AriaChat locally. Download and install [**Ollama**](https://ollama.com/)
 
 ### Docker Setup
 - Download and install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
