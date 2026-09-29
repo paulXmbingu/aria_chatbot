@@ -1,0 +1,13 @@
+app = 'aria-chatbot-ollama'
+primary_region = 'jnb'
+
+[http_service]
+  internal_port = 11434
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+
+[[vm]]
+  memory = '4gb'
+  cpu_kind = 'shared'
+  cpus = 2
