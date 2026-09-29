@@ -1,12 +1,6 @@
 # AriaChat
-AriaChat is a research case study exploring how **intelligent capabilities can be integrated into future Excite! Innovation products**.
+AriaChat is a research case study exploring how **intelligent capabilities can be integrated into future Excite! Innovation products**. AriaChat demonstrates practical conversational AI capabilities, including natural interaction, context-aware responses, persistent conversations, automatic titles, message regeneration, AI-generated greetings, and memory of relevant user context.
 
-####
-![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
-
-### Capabilities
-
-AriaChat demonstrates practical conversational AI capabilities, including natural interaction, context-aware responses, persistent conversations, automatic titles, message regeneration, AI-generated greetings, and memory of relevant user context.
 
 ### Case Study Focus
 
@@ -15,6 +9,9 @@ The case study explores how AI can be integrated into product experiences, with 
 ### System Architecture & Project Structure
 
 The core principle was to establish a **modular architecture and project structure**, keeping the frontend, backend, and AI components clearly separated.
+
+####
+![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
 
 ### Outcomes & Next Steps
 
