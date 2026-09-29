@@ -15,7 +15,7 @@ The core principle was to establish a **modular architecture and project structu
 
 ### Outcomes & Next Steps
 
-Progressively integrate the research findings into [**Boltshift’s customer experience and vendor back office**](https://boltshift.vercel.app/), introducing AI-powered features as product and engineering teams establish the required **data hygiene, quality, and readiness** throughout the roadmap.
+The case study established a foundation for AI integration, modular architecture, and Backend–AI/ML collaboration. These findings will inform the progressive integration of AI-powered capabilities into Boltshift’s customer experience and vendor back office as product and engineering teams establish the required data hygiene, quality, and readiness across the roadmap.
 
 
 # Test the Project locally
