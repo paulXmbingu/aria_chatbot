@@ -1,16 +1,16 @@
-# fly.toml app configuration file generated for aria-chatbot on 2026-09-29T16:32:04Z
+# fly.toml app configuration file generated for aria-chatbot on 2026-09-29T17:56:19Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'aria-chatbot'
-primary_region = 'iad'
+primary_region = 'jnb'
 console_command = '/code/manage.py shell'
 
 [build]
 
 [deploy]
-  release_command = 'python manage.py migrate --noinput'
+  release_command = 'uv run python manage.py migrate --noinput'
 
 [env]
   PORT = '8000'
