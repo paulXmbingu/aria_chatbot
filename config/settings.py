@@ -28,7 +28,11 @@ DEBUG = (
 )
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "aria-chatbot.fly.dev",
+    "127.0.0.1",
+    "localhost",
+]
 
 
 INSTALLED_APPS = [
