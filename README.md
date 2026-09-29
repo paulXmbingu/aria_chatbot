@@ -21,7 +21,7 @@ The core principle was to establish a **modular architecture and project structu
 Progressively integrate the research findings into [**Boltshift’s customer experience and vendor back office**](https://boltshift.vercel.app/), introducing AI-powered features as product and engineering teams establish the required **data hygiene, quality, and readiness** throughout the roadmap.
 
 
-# Test the Project on Your Machine
+# Test the Project locally
 Follow the setup below to run AriaChat locally. Download and install [**Ollama**](https://ollama.com/)
 
 ### Docker Setup: Install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
@@ -30,15 +30,5 @@ Follow the setup below to run AriaChat locally. Download and install [**Ollama**
 git clone https://github.com/paulXmbingu/aria_chatbot
 cd aria_chatbot
 docker compose up --build
-http://localhost:8000
-```
-
-
-### uv Setup: Install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
-
-```bash
-uv sync
-uv run python manage.py migrate
-uv run python manage.py runserver
 http://localhost:8000
 ```
