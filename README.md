@@ -20,9 +20,12 @@ The case study established a foundation for AI integration, modular architecture
 
 # Test the Project locally
 
-- Download & Install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
+- Download & Install on your os [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
 - Clone & open the repo.
 
 ```bash
-docker compose up --build
+uv sync
+uv run python manage.py migrate
+uv run python manage.py runserver
+http://127.0.0.1:8000
 ```
