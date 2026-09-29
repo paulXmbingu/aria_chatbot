@@ -4,18 +4,13 @@ AriaChat is a research case study exploring how **intelligent capabilities can b
 ####
 ![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
 
-### Case Study Focus
-
-The case study examines how AI can be introduced into product development while exploring the technical architecture, engineering workflows, and collaboration required to build AI-powered experiences.
-
-- AI integration into product experiences
-- AI application architecture
-- Developer experience and productivity
-- Backend and AI/ML collaboration
-
 ### Capabilities
 
 AriaChat demonstrates practical conversational AI capabilities, including natural interaction, context-aware responses, persistent conversations, automatic titles, message regeneration, AI-generated greetings, and memory of relevant user context.
+
+### Case Study Focus
+
+The case study explores how AI can be integrated into product experiences, with a focus on AI application architecture, developer experience and productivity, and collaboration between Backend and AI/ML engineering teams. UX and frontend development workflows were outside the scope of the project.
 
 ### System Architecture & Project Structure
 
