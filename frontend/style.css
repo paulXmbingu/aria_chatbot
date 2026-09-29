@@ -113,6 +113,7 @@ button:disabled {
     overflow: hidden;
 }
 
+
 /* ========================================
    Sidebar
 ======================================== */
@@ -507,6 +508,7 @@ button:disabled {
     object-fit: cover;
 }
 
+
 /* ========================================
    Theme Toggle
 ======================================== */
@@ -546,6 +548,7 @@ button:disabled {
 .theme-icon-system {
     display: block;
 }
+
 
 /* ========================================
    Desktop Collapsed Sidebar
@@ -605,6 +608,7 @@ button:disabled {
     }
 }
 
+
 /* ========================================
    Mobile Sidebar Overlay
 ======================================== */
@@ -616,6 +620,7 @@ button:disabled {
 .mobile-chat-header {
     display: none;
 }
+
 
 /* ========================================
    Chat
@@ -636,7 +641,7 @@ button:disabled {
     padding:
         32px
         max(24px, calc((100% - var(--content-width)) / 2))
-        192px;
+        140px;
     overflow-y: auto;
     scrollbar-width: none;
 }
@@ -694,6 +699,7 @@ button:disabled {
 .message.assistant .message-content > :last-child {
     margin-bottom: 0;
 }
+
 
 /* ========================================
    Loading State
@@ -762,6 +768,7 @@ button:disabled {
     }
 }
 
+
 /* ========================================
    Empty State
 ======================================== */
@@ -804,6 +811,7 @@ button:disabled {
     font-size: 14px;
     line-height: 1.6;
 }
+
 
 /* ========================================
    Composer
@@ -902,6 +910,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
+
 /* ========================================
    Message Actions
 ======================================== */
@@ -934,6 +943,7 @@ button:disabled {
     opacity: 0.45;
     cursor: not-allowed;
 }
+
 
 /* ========================================
    Markdown & Response Typography
@@ -1148,13 +1158,18 @@ button:disabled {
     line-height: 1.5;
 }
 
+
+/* ========================================
+   Code Blocks
+======================================== */
+
 .code-block {
     width: 100%;
     margin:
         20px
         0;
     overflow: hidden;
-    border: 0px solid var(--border-code);
+    border: 0 solid var(--border-code);
     border-radius: 16px;
     background: var(--surface-code);
 }
@@ -1236,12 +1251,88 @@ button:disabled {
     line-height: 1.65;
 }
 
+
+/* ========================================
+   Prism Syntax Highlighting
+   Raw Values
+======================================== */
+
+.message-content pre code[class*="language-"],
+.message-content pre[class*="language-"] {
+    color: #404040;
+    background: transparent;
+    text-shadow: none;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #737373;
+}
+
+.token.punctuation {
+    color: #525252;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #D20F39;
+}
+
+.token.boolean,
+.token.number {
+    color: #8E4EC6;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #218358;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #C76E00;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #2870BD;
+}
+
+.token.function,
+.token.class-name {
+    color: #644FC1;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #B35C00;
+}
+
+
+/* ========================================
+   Tables
+======================================== */
+
 .message-content table {
     width: 100%;
     margin:
         20px
         0;
-    border: 0px solid var(--border-strong);
+    border: 1px solid var(--border-strong);
     border-collapse: separate;
     border-spacing: 0;
     border-radius: 8px;
@@ -1302,6 +1393,7 @@ button:disabled {
     accent-color: var(--primary);
 }
 
+
 /* ========================================
    Error
 ======================================== */
@@ -1309,6 +1401,7 @@ button:disabled {
 .error-message .message-content {
     color: var(--error);
 }
+
 
 /* ========================================
    Tablet
@@ -1336,6 +1429,7 @@ button:disabled {
             18px;
     }
 }
+
 
 /* ========================================
    Mobile
@@ -1678,10 +1772,13 @@ button:disabled {
     }
 
     .sidebar-footer {
-        padding-right: 8px;
-        padding-left: 8px;
+        padding:
+            12px
+            8px
+            0;
     }
 }
+
 
 /* ========================================
    Small Phones
@@ -1768,6 +1865,7 @@ button:disabled {
     }
 }
 
+
 /* ========================================
    Very Small Phones
 ======================================== */
@@ -1797,8 +1895,9 @@ button:disabled {
     }
 }
 
+
 /* ========================================
-   Theme Variables
+   Dark Theme
 ======================================== */
 
 :root[data-theme="dark"] {
@@ -1855,6 +1954,11 @@ button:disabled {
     --avatar-surface: #333333;
     --avatar-text: #B8B8B8;
 }
+
+
+/* ========================================
+   System Dark Theme
+======================================== */
 
 @media (prefers-color-scheme: dark) {
 
@@ -1914,6 +2018,179 @@ button:disabled {
     }
 }
 
+
+/* ========================================
+   Prism Dark Theme
+======================================== */
+
+:root[data-theme="dark"] .message-content pre code[class*="language-"],
+:root[data-theme="dark"] .message-content pre[class*="language-"] {
+    color: #B8B8B8;
+}
+
+:root[data-theme="dark"] .token.comment,
+:root[data-theme="dark"] .token.prolog,
+:root[data-theme="dark"] .token.doctype,
+:root[data-theme="dark"] .token.cdata {
+    color: #B8B8B8;
+}
+
+:root[data-theme="dark"] .token.punctuation {
+    color: #D4D4D4;
+}
+
+:root[data-theme="dark"] .token.property,
+:root[data-theme="dark"] .token.tag,
+:root[data-theme="dark"] .token.constant,
+:root[data-theme="dark"] .token.symbol,
+:root[data-theme="dark"] .token.deleted {
+    color: #F06A86;
+}
+
+:root[data-theme="dark"] .token.boolean,
+:root[data-theme="dark"] .token.number {
+    color: #C59BF0;
+}
+
+:root[data-theme="dark"] .token.selector,
+:root[data-theme="dark"] .token.attr-name,
+:root[data-theme="dark"] .token.string,
+:root[data-theme="dark"] .token.char,
+:root[data-theme="dark"] .token.builtin,
+:root[data-theme="dark"] .token.inserted {
+    color: #65C89A;
+}
+
+:root[data-theme="dark"] .token.operator,
+:root[data-theme="dark"] .token.entity,
+:root[data-theme="dark"] .token.url,
+:root[data-theme="dark"] .language-css .token.string,
+:root[data-theme="dark"] .style .token.string {
+    color: #F0A15A;
+}
+
+:root[data-theme="dark"] .token.atrule,
+:root[data-theme="dark"] .token.attr-value,
+:root[data-theme="dark"] .token.keyword {
+    color: #72AEEA;
+}
+
+:root[data-theme="dark"] .token.function,
+:root[data-theme="dark"] .token.class-name {
+    color: #A996E8;
+}
+
+:root[data-theme="dark"] .token.regex,
+:root[data-theme="dark"] .token.important,
+:root[data-theme="dark"] .token.variable {
+    color: #E5A75E;
+}
+
+
+/* ========================================
+   System Dark Prism
+======================================== */
+
+@media (prefers-color-scheme: dark) {
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .message-content pre code[class*="language-"],
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .message-content pre[class*="language-"] {
+        color: #B8B8B8;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.comment,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.prolog,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.doctype,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.cdata {
+        color: #B8B8B8;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.punctuation {
+        color: #D4D4D4;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.property,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.tag,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.constant,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.symbol,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.deleted {
+        color: #F06A86;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.boolean,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.number {
+        color: #C59BF0;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.selector,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.attr-name,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.string,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.char,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.builtin,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.inserted {
+        color: #65C89A;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.operator,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.entity,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.url,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .language-css .token.string,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .style .token.string {
+        color: #F0A15A;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.atrule,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.attr-value,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.keyword {
+        color: #72AEEA;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.function,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.class-name {
+        color: #A996E8;
+    }
+
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.regex,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.important,
+    :root:not([data-theme="light"]):not([data-theme="dark"])
+    .token.variable {
+        color: #E5A75E;
+    }
+}
+
+
 /* ========================================
    Theme Icon State
 ======================================== */
@@ -1938,102 +2215,4 @@ button:disabled {
 
 :root[data-theme="dark"] .theme-icon-dark {
     display: block;
-}
-
-
-/* ========================================
-   Prism Syntax Highlighting
-   Radix Colors — Step 11
-======================================== */
-
-.message-content pre code[class*="language-"],
-.message-content pre[class*="language-"] {
-    color: var(--gray-11);
-    background: transparent;
-    text-shadow: none;
-}
-
-
-/* Comments */
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-    color: var(--gray-11);
-}
-
-
-/* Punctuation */
-
-.token.punctuation {
-    color: var(--gray-11);
-}
-
-
-/* Properties / Tags */
-
-.token.property,
-.token.tag,
-.token.constant,
-.token.symbol,
-.token.deleted {
-    color: var(--crimson-11);
-}
-
-
-/* Numbers / Booleans */
-
-.token.boolean,
-.token.number {
-    color: var(--purple-11);
-}
-
-
-/* Strings */
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-    color: var(--green-11);
-}
-
-
-/* Operators */
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-    color: var(--orange-11);
-}
-
-
-/* Keywords */
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-    color: var(--blue-11);
-}
-
-
-/* Functions / Classes */
-
-.token.function,
-.token.class-name {
-    color: var(--violet-11);
-}
-
-
-/* Regex / Important / Variables */
-
-.token.regex,
-.token.important,
-.token.variable {
-    color: var(--amber-11);
 }

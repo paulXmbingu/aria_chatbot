@@ -16,19 +16,14 @@
         href="/static/assets/logos/favicon.png"
     >
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/gray.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/crimson.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/purple.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/green.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/orange.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/blue.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/violet.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@radix-ui/colors@latest/amber.css">
-
-    <link rel="stylesheet" href="/static/style.css">
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
 </head>
 
 <body>
+
     <div class="app">
 
         <aside class="sidebar">
@@ -38,6 +33,7 @@
                 <div class="mobile-sidebar-header">
 
                     <div class="brand">
+
                         <img
                             class="logo-mark"
                             src="/static/assets/logos/logo-mark.png"
@@ -47,6 +43,7 @@
                         <span class="brand-name">
                             AriaChat
                         </span>
+
                     </div>
 
                     <button
@@ -97,11 +94,13 @@
                         type="button"
                         class="new-chat-button"
                     >
+
                         <i data-lucide="square-pen"></i>
 
                         <span>
                             New chat
                         </span>
+
                     </button>
 
 
@@ -155,10 +154,12 @@
                 <div class="user-profile">
 
                     <div class="user-avatar">
+
                         <img
                             src="/static/assets/media/paul-mbingu.jpg"
                             alt="Paul Mbingu"
                         >
+
                     </div>
 
                     <span>
@@ -175,6 +176,7 @@
                     aria-label="Theme: System"
                     title="Theme: System"
                 >
+
                     <i
                         data-lucide="sun-moon"
                         class="theme-icon theme-icon-system"
@@ -189,6 +191,7 @@
                         data-lucide="sun"
                         class="theme-icon theme-icon-dark"
                     ></i>
+
                 </button>
 
             </div>
@@ -312,15 +315,21 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Local JavaScript dependencies -->
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/static/vendor/marked.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.min.js"></script>
+    <script src="/static/vendor/lucide.min.js"></script>
+
+    <script src="/static/vendor/prism.min.js"></script>
+
 
     <script>
-        lucide.createIcons();
+        if (typeof lucide !== "undefined") {
+            lucide.createIcons();
+        }
     </script>
+
 
     <script src="/static/app.js"></script>
 
