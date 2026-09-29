@@ -75,19 +75,16 @@ let isLoading = false;
 const THEME_STORAGE_KEY =
     "aria-theme";
 
-
 const systemThemeMediaQuery =
     window.matchMedia(
         "(prefers-color-scheme: dark)"
     );
-
 
 function getSystemTheme() {
     return systemThemeMediaQuery.matches
         ? "dark"
         : "light";
 }
-
 
 function getSavedTheme() {
     const savedTheme =
@@ -106,11 +103,9 @@ function getSavedTheme() {
     return "system";
 }
 
-
 function getCurrentTheme() {
     return getSavedTheme();
 }
-
 
 function getEffectiveTheme() {
     const theme =
@@ -122,7 +117,6 @@ function getEffectiveTheme() {
 
     return theme;
 }
-
 
 function updateThemeIcon() {
     if (!themeToggle) {
@@ -147,14 +141,12 @@ function updateThemeIcon() {
             ".theme-icon-dark"
         );
 
-
     if (systemIcon) {
         systemIcon.style.display =
             theme === "system"
                 ? "block"
                 : "none";
     }
-
 
     if (lightIcon) {
         lightIcon.style.display =
@@ -163,7 +155,6 @@ function updateThemeIcon() {
                 : "none";
     }
 
-
     if (darkIcon) {
         darkIcon.style.display =
             theme === "dark"
@@ -171,19 +162,16 @@ function updateThemeIcon() {
                 : "none";
     }
 
-
     const labels = {
         system: "Theme: System",
         light: "Theme: Light",
         dark: "Theme: Dark",
     };
 
-
     themeToggle.setAttribute(
         "aria-label",
         labels[theme]
     );
-
 
     themeToggle.setAttribute(
         "title",
@@ -191,18 +179,13 @@ function updateThemeIcon() {
     );
 }
 
-
 function applyTheme(theme) {
-
     if (theme === "system") {
-
         document.documentElement
             .removeAttribute(
                 "data-theme"
             );
-
     } else {
-
         document.documentElement
             .setAttribute(
                 "data-theme",
@@ -210,13 +193,10 @@ function applyTheme(theme) {
             );
     }
 
-
     updateThemeIcon();
 }
 
-
 function restoreTheme() {
-
     const savedTheme =
         getSavedTheme();
 
@@ -225,56 +205,40 @@ function restoreTheme() {
     );
 }
 
-
 function cycleTheme() {
-
     const currentTheme =
         getCurrentTheme();
 
-
     let nextTheme;
 
-
     if (currentTheme === "system") {
-
         nextTheme = "light";
-
     } else if (currentTheme === "light") {
-
         nextTheme = "dark";
-
     } else {
-
         nextTheme = "system";
     }
-
 
     localStorage.setItem(
         THEME_STORAGE_KEY,
         nextTheme
     );
 
-
     applyTheme(
         nextTheme
     );
 }
 
-
 if (themeToggle) {
-
     themeToggle.addEventListener(
         "click",
         cycleTheme
     );
-
 }
-
 
 systemThemeMediaQuery.addEventListener(
     "change",
     () => {
-
         if (
             getCurrentTheme() ===
             "system"
@@ -283,10 +247,8 @@ systemThemeMediaQuery.addEventListener(
                 "system"
             );
         }
-
     }
 );
-
 
 restoreTheme();
 
@@ -300,7 +262,6 @@ marked.setOptions({
     breaks: true,
     pedantic: false,
 });
-
 
 marked.use({
     renderer: {
@@ -324,7 +285,6 @@ marked.use({
                 <pre><code>${text}</code></pre>
             `;
         },
-
 
         link({ href, title, text }) {
 
@@ -356,6 +316,8 @@ function renderMarkdown(content) {
 
     return marked.parse(content);
 }
+
+
 /* ========================================
    Typing Animation
 ======================================== */
@@ -560,6 +522,7 @@ function enhanceCodeBlocks(
                             },
                             1500
                         );
+
                     } catch (error) {
                         console.error(
                             error
@@ -736,6 +699,7 @@ function addMessageActions(
                     },
                     1500
                 );
+
             } catch (error) {
                 console.error(
                     error
@@ -1067,6 +1031,10 @@ async function createConversation() {
     conversationId =
         data.id;
 
+    updateConversationUrl(
+        data.public_id
+    );
+
     return data;
 }
 
@@ -1124,6 +1092,45 @@ async function loadConversations() {
     }
 
     return data;
+}
+
+
+/* ========================================
+   Conversation URL
+======================================== */
+
+function updateConversationUrl(
+    publicId
+) {
+    if (!publicId) {
+        return;
+    }
+
+    const url =
+        `/chat/c/${publicId}/`;
+
+    window.history.pushState(
+        {
+            conversationId:
+                conversationId,
+        },
+        "",
+        url
+    );
+}
+
+
+function getConversationPublicIdFromUrl() {
+    const match =
+        window.location.pathname.match(
+            /^\/chat\/c\/([0-9a-f-]{36})\/?$/
+        );
+
+    if (!match) {
+        return null;
+    }
+
+    return match[1];
 }
 
 
@@ -1413,6 +1420,12 @@ async function deleteConversation(
             messageInput.value =
                 "";
 
+            window.history.pushState(
+                {},
+                "",
+                "/"
+            );
+
             messageInput.focus();
         }
 
@@ -1701,6 +1714,10 @@ function selectConversation(
     conversationId =
         conversation.id;
 
+    updateConversationUrl(
+        conversation.public_id
+    );
+
     renderConversationMessages(
         conversation
     );
@@ -1911,20 +1928,38 @@ async function handleNewChat() {
         return;
     }
 
-    conversationId = null;
+    try {
+        const conversation =
+            await createConversation();
 
-    messagesContainer.innerHTML =
-        "";
+        conversationId =
+            conversation.id;
 
-    messagesContainer.appendChild(
-        emptyState
-    );
+        messagesContainer.innerHTML =
+            "";
 
-    updateEmptyState();
+        messagesContainer.appendChild(
+            emptyState
+        );
 
-    closeSidebar();
+        updateEmptyState();
 
-    messageInput.focus();
+        await refreshConversations();
+
+        closeSidebar();
+
+        messageInput.focus();
+
+    } catch (error) {
+        console.error(
+            error
+        );
+
+        addErrorMessage(
+            error.message ||
+            "Unable to create a new conversation."
+        );
+    }
 }
 
 
@@ -2005,6 +2040,8 @@ chatForm.addEventListener(
         try {
             if (!conversationId) {
                 await createConversation();
+
+                await refreshConversations();
             }
 
             const data =
@@ -2106,6 +2143,7 @@ async function loadGreeting() {
             greetingElement.textContent =
                 data.greeting;
         }
+
     } catch (error) {
         console.error(
             "Failed to load greeting:",
@@ -2121,6 +2159,7 @@ async function loadGreeting() {
 
 restoreSidebarState();
 
+
 async function initializeChat() {
     try {
         const conversations =
@@ -2129,21 +2168,66 @@ async function initializeChat() {
         conversationListData =
             conversations;
 
-        conversationId =
-            null;
-
         renderConversations(
             conversations
         );
 
-        messagesContainer.innerHTML =
-            "";
+        const publicId =
+            getConversationPublicIdFromUrl();
 
-        messagesContainer.appendChild(
-            emptyState
-        );
+        if (publicId) {
+            const conversation =
+                conversations.find(
+                    (item) =>
+                        item.public_id ===
+                        publicId
+                );
 
-        updateEmptyState();
+            if (conversation) {
+                conversationId =
+                    conversation.id;
+
+                renderConversationMessages(
+                    conversation
+                );
+
+                renderConversations(
+                    conversations
+                );
+
+            } else {
+                conversationId =
+                    null;
+
+                window.history.replaceState(
+                    {},
+                    "",
+                    "/"
+                );
+
+                messagesContainer.innerHTML =
+                    "";
+
+                messagesContainer.appendChild(
+                    emptyState
+                );
+
+                updateEmptyState();
+            }
+
+        } else {
+            conversationId =
+                null;
+
+            messagesContainer.innerHTML =
+                "";
+
+            messagesContainer.appendChild(
+                emptyState
+            );
+
+            updateEmptyState();
+        }
 
     } catch (error) {
         console.error(
@@ -2158,8 +2242,18 @@ async function initializeChat() {
 
     messageInput.focus();
 
-    await loadGreeting();
+    if (!conversationId) {
+        await loadGreeting();
+    }
 }
+
+
+window.addEventListener(
+    "popstate",
+    () => {
+        initializeChat();
+    }
+);
 
 
 initializeChat();

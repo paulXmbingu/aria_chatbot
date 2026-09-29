@@ -135,6 +135,7 @@ dependencies = [
     { name = "ollama" },
     { name = "psycopg", extra = ["binary"] },
     { name = "python-dotenv" },
+    { name = "tiktoken" },
     { name = "whitenoise" },
 ]
 
@@ -149,6 +150,7 @@ requires-dist = [
     { name = "ollama", specifier = ">=0.6.2" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.3.6" },
     { name = "python-dotenv", specifier = ">=1.2.3" },
+    { name = "tiktoken", specifier = ">=0.14.0" },
     { name = "whitenoise", specifier = ">=6.12.0" },
 ]
 

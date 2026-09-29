@@ -6,5 +6,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    path("chat/c/<uuid:public_id>/", TemplateView.as_view(template_name="index.html"), name="conversation"),
     path("api/chat/", include("apps.chat.urls")),
 ]

@@ -24,6 +24,7 @@ class ConversationSerializer(serializers.ModelSerializer):
         model = Conversation
         fields = [
             "id",
+            "public_id",
             "title",
             "created_at",
             "messages",
@@ -32,6 +33,7 @@ class ConversationSerializer(serializers.ModelSerializer):
 
 class ChatMessageSerializer(serializers.Serializer):
     conversation_id = serializers.IntegerField()
+
     message = serializers.CharField(
         allow_blank=False,
         trim_whitespace=True,
@@ -40,6 +42,7 @@ class ChatMessageSerializer(serializers.Serializer):
 
 class RegenerateMessageSerializer(serializers.Serializer):
     conversation_id = serializers.IntegerField()
+
     message_id = serializers.IntegerField()
 
 
