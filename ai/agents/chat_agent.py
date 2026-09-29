@@ -7,7 +7,7 @@ from ai.prompts import SYSTEM_PROMPT
 
 MODEL_NAME = os.getenv(
     "OLLAMA_MODEL",
-    "llama3.2:3b",
+    "gemma3:4b",
 )
 
 

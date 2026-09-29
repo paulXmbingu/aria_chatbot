@@ -1,4 +1,3 @@
--- Active: 1790455992930@@127.0.0.1@3306
 import os
 
 from ollama import Client
@@ -12,10 +11,10 @@ OLLAMA_HOST = os.getenv(
 
 MODEL_NAME = os.getenv(
     "OLLAMA_MODEL",
-    "llama3.2:3b",
+    "gemma3:4b",
 )
 
 
 client = Client(
-    host=OLLAMA_HOST
+    host=OLLAMA_HOST,
 )

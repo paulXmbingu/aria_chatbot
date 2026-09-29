@@ -4,16 +4,17 @@ from ai.agents.chat_agent import root_agent
 
 
 class AIService:
+
     @staticmethod
     async def generate(
         prompt: str,
     ) -> str | None:
         runner = InMemoryRunner(
-            agent=root_agent
+            agent=root_agent,
         )
 
         events = await runner.run_debug(
-            prompt
+            prompt,
         )
 
         for event in reversed(events):

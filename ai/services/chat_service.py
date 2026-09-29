@@ -11,6 +11,7 @@ from apps.chat.models import Conversation, Message
 
 
 class ChatService:
+
     @staticmethod
     async def generate_response(
         conversation: Conversation,
