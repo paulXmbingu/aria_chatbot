@@ -26,8 +26,8 @@ Follow the setup below to run AriaChat on your machine.
 
 ### Docker Setup: Install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
 
+- Clone & open the repo.
+
 ```bash
-git clone https://github.com/paulXmbingu/aria_chatbot
-cd aria_chatbot
 docker compose up --build
 ```
