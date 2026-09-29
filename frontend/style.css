@@ -25,11 +25,11 @@
     --surface-input: #FFFFFF;
     --surface-menu: #FFFFFF;
 
-    --surface-code: #F8F8F8;
+    --surface-code: #F2F2F2;
     --surface-code-inline: #F5F5F5;
 
-    --surface-table-header: #F7F7F7;
-    --surface-table-alt: #FAFAFA;
+    --surface-table-header: #F0F0F0;
+    --surface-table-alt: #F7F7F7;
 
     --surface-user-message: #F0F0F0;
 
@@ -884,7 +884,7 @@ button:disabled {
     padding: 0;
     border-radius: 50%;
     background: var(--primary);
-    color: var(--surface-input);
+    color: #FFFFFF;
     font-size: 18px;
     line-height: 1;
     cursor: pointer;
@@ -1154,7 +1154,7 @@ button:disabled {
         20px
         0;
     overflow: hidden;
-    border: 0;
+    border: 0px solid var(--border-code);
     border-radius: 16px;
     background: var(--surface-code);
 }
@@ -1241,10 +1241,10 @@ button:disabled {
     margin:
         20px
         0;
-    border: 0;
+    border: 0px solid var(--border-strong);
     border-collapse: separate;
     border-spacing: 0;
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
     background: var(--surface-input);
     font-size: 14px;
@@ -1272,19 +1272,19 @@ button:disabled {
 }
 
 .message-content tr:first-child th:first-child {
-    border-top-left-radius: 16px;
+    border-top-left-radius: 8px;
 }
 
 .message-content tr:first-child th:last-child {
-    border-top-right-radius: 16px;
+    border-top-right-radius: 8px;
 }
 
 .message-content tr:last-child td:first-child {
-    border-bottom-left-radius: 16px;
+    border-bottom-left-radius: 8px;
 }
 
 .message-content tr:last-child td:last-child {
-    border-bottom-right-radius: 16px;
+    border-bottom-right-radius: 8px;
 }
 
 .message-content img {
@@ -1658,7 +1658,7 @@ button:disabled {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
-        border-radius: 16px;
+        border-radius: 8px;
     }
 
     .message-content pre {
@@ -1826,11 +1826,11 @@ button:disabled {
     --surface-input: #242424;
     --surface-menu: #242424;
 
-    --surface-code: #202020;
-    --surface-code-inline: #2A2A2A;
+    --surface-code: #242424;
+    --surface-code-inline: #303030;
 
-    --surface-table-header: #2A2A2A;
-    --surface-table-alt: #202020;
+    --surface-table-header: #303030;
+    --surface-table-alt: #272727;
 
     --surface-user-message: #303030;
 
@@ -1883,11 +1883,11 @@ button:disabled {
         --surface-input: #242424;
         --surface-menu: #242424;
 
-        --surface-code: #202020;
-        --surface-code-inline: #2A2A2A;
+        --surface-code: #242424;
+        --surface-code-inline: #303030;
 
-        --surface-table-header: #2A2A2A;
-        --surface-table-alt: #202020;
+        --surface-table-header: #303030;
+        --surface-table-alt: #272727;
 
         --surface-user-message: #303030;
 
