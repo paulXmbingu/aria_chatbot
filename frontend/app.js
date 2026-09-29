@@ -304,7 +304,30 @@ marked.setOptions({
 
 marked.use({
     renderer: {
+
+        code({ text, lang }) {
+
+            if (
+                lang &&
+                Prism.languages[lang]
+            ) {
+                return `
+                    <pre><code class="language-${lang}">${Prism.highlight(
+                        text,
+                        Prism.languages[lang],
+                        lang
+                    )}</code></pre>
+                `;
+            }
+
+            return `
+                <pre><code>${text}</code></pre>
+            `;
+        },
+
+
         link({ href, title, text }) {
+
             const link =
                 document.createElement("a");
 
@@ -320,19 +343,19 @@ marked.use({
 
             return link.outerHTML;
         },
+
     },
 });
 
 
 function renderMarkdown(content) {
+
     if (!content) {
         return "";
     }
 
     return marked.parse(content);
 }
-
-
 /* ========================================
    Typing Animation
 ======================================== */

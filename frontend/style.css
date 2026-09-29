@@ -1939,3 +1939,101 @@ button:disabled {
 :root[data-theme="dark"] .theme-icon-dark {
     display: block;
 }
+
+
+/* ========================================
+   Prism Syntax Highlighting
+   Radix Colors — Step 11
+======================================== */
+
+.message-content pre code[class*="language-"],
+.message-content pre[class*="language-"] {
+    color: var(--gray-11);
+    background: transparent;
+    text-shadow: none;
+}
+
+
+/* Comments */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: var(--gray-11);
+}
+
+
+/* Punctuation */
+
+.token.punctuation {
+    color: var(--gray-11);
+}
+
+
+/* Properties / Tags */
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: var(--crimson-11);
+}
+
+
+/* Numbers / Booleans */
+
+.token.boolean,
+.token.number {
+    color: var(--purple-11);
+}
+
+
+/* Strings */
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: var(--green-11);
+}
+
+
+/* Operators */
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: var(--orange-11);
+}
+
+
+/* Keywords */
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: var(--blue-11);
+}
+
+
+/* Functions / Classes */
+
+.token.function,
+.token.class-name {
+    color: var(--violet-11);
+}
+
+
+/* Regex / Important / Variables */
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: var(--amber-11);
+}
