@@ -147,12 +147,14 @@ function updateThemeIcon() {
             ".theme-icon-dark"
         );
 
+
     if (systemIcon) {
         systemIcon.style.display =
             theme === "system"
                 ? "block"
                 : "none";
     }
+
 
     if (lightIcon) {
         lightIcon.style.display =
@@ -161,6 +163,7 @@ function updateThemeIcon() {
                 : "none";
     }
 
+
     if (darkIcon) {
         darkIcon.style.display =
             theme === "dark"
@@ -168,16 +171,19 @@ function updateThemeIcon() {
                 : "none";
     }
 
+
     const labels = {
         system: "Theme: System",
         light: "Theme: Light",
         dark: "Theme: Dark",
     };
 
+
     themeToggle.setAttribute(
         "aria-label",
         labels[theme]
     );
+
 
     themeToggle.setAttribute(
         "title",
@@ -204,6 +210,7 @@ function applyTheme(theme) {
             );
     }
 
+
     updateThemeIcon();
 }
 
@@ -224,7 +231,9 @@ function cycleTheme() {
     const currentTheme =
         getCurrentTheme();
 
+
     let nextTheme;
+
 
     if (currentTheme === "system") {
 
@@ -239,10 +248,12 @@ function cycleTheme() {
         nextTheme = "system";
     }
 
+
     localStorage.setItem(
         THEME_STORAGE_KEY,
         nextTheme
     );
+
 
     applyTheme(
         nextTheme
@@ -256,6 +267,7 @@ if (themeToggle) {
         "click",
         cycleTheme
     );
+
 }
 
 
@@ -318,6 +330,78 @@ function renderMarkdown(content) {
     }
 
     return marked.parse(content);
+}
+
+
+/* ========================================
+   Typing Animation
+======================================== */
+
+function sleep(milliseconds) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+
+async function typeAssistantResponse(
+    messageContent,
+    content
+) {
+    if (!messageContent || !content) {
+        return;
+    }
+
+    const characters =
+        Array.from(content);
+
+    let visibleContent = "";
+
+    const charactersPerFrame = 4;
+
+    for (
+        let index = 0;
+        index < characters.length;
+        index += charactersPerFrame
+    ) {
+        visibleContent +=
+            characters
+                .slice(
+                    index,
+                    index + charactersPerFrame
+                )
+                .join("");
+
+        messageContent.innerHTML =
+            renderMarkdown(
+                visibleContent
+            );
+
+        enhanceCodeBlocks(
+            messageContent
+        );
+
+        messagesContainer.scrollTo({
+            top:
+                messagesContainer.scrollHeight,
+            behavior: "auto",
+        });
+
+        await sleep(8);
+    }
+
+    messageContent.innerHTML =
+        renderMarkdown(content);
+
+    enhanceCodeBlocks(
+        messageContent
+    );
+
+    messagesContainer.scrollTo({
+        top:
+            messagesContainer.scrollHeight,
+        behavior: "auto",
+    });
 }
 
 
@@ -767,13 +851,9 @@ async function regenerateResponse(
             );
         }
 
-        originalContent.innerHTML =
-            renderMarkdown(
-                data.response
-            );
-
-        enhanceCodeBlocks(
-            originalContent
+        await typeAssistantResponse(
+            originalContent,
+            data.response
         );
 
         addMessageActions(
@@ -1911,13 +1991,43 @@ chatForm.addEventListener(
 
             loadingMessage.remove();
 
-            addMessage(
-                "assistant",
-                data.response,
-                {
-                    messageId:
-                        data.message_id,
-                }
+            const assistantMessage =
+                document.createElement(
+                    "div"
+                );
+
+            assistantMessage.className =
+                "message assistant";
+
+            assistantMessage.dataset.messageId =
+                data.message_id;
+
+            const assistantContent =
+                document.createElement(
+                    "div"
+                );
+
+            assistantContent.className =
+                "message-content";
+
+            assistantMessage.appendChild(
+                assistantContent
+            );
+
+            messagesContainer.appendChild(
+                assistantMessage
+            );
+
+            updateEmptyState();
+
+            await typeAssistantResponse(
+                assistantContent,
+                data.response
+            );
+
+            addMessageActions(
+                assistantMessage,
+                data.response
             );
 
             await refreshConversations();

@@ -636,7 +636,7 @@ button:disabled {
     padding:
         32px
         max(24px, calc((100% - var(--content-width)) / 2))
-        140px;
+        192px;
     overflow-y: auto;
     scrollbar-width: none;
 }
