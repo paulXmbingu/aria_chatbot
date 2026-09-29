@@ -22,7 +22,7 @@ Progressively integrate the research findings into [**Boltshift’s customer exp
 
 
 # Test the Project locally
-Follow the setup below to run AriaChat locally. Download and install [**Ollama**](https://ollama.com/)
+Follow the setup below to run AriaChat on your machine.
 
 ### Docker Setup: Install [**Docker Desktop**](https://www.docker.com/products/docker-desktop/)
 
@@ -30,5 +30,4 @@ Follow the setup below to run AriaChat locally. Download and install [**Ollama**
 git clone https://github.com/paulXmbingu/aria_chatbot
 cd aria_chatbot
 docker compose up --build
-http://localhost:8000
 ```
