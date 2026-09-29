@@ -471,7 +471,7 @@ button:disabled {
     justify-content: space-between;
     min-height: 40px;
     margin-top: auto;
-    padding: 0 8px;
+    padding: 12px 8px 0;
     color: var(--text);
     font-size: 14px;
     font-weight: 400;
