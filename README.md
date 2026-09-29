@@ -4,7 +4,7 @@ AriaChat is a research case study exploring **AI integration in future Excite! I
 
 ### Case Study Focus
 
-The case study explores how AI can be integrated into product experiences, with a focus on AI application architecture, developer experience and productivity, and collaboration between Backend and AI/ML engineering teams. UX and frontend development workflows were outside the scope of the project.
+The case study's main objective was to explores how AI can be integrated into product experiences, with a focus on AI application architecture, developer experience and productivity, and collaboration between Backend and AI/ML engineering teams. UX and frontend development workflows were outside the scope of the project.
 
 ### System Architecture & Project Structure
 
