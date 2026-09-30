@@ -11,7 +11,7 @@ The case study's main objective was to explores how AI can be integrated into pr
 The core principle was to establish a **modular architecture and project structure**, keeping the frontend, backend, and AI components clearly separated and easily composable.
 
 ####
-![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790638232/aria_chat_architecture_j7pahi.png)
+![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1790744434/aria_chat_architecture_j7pahi.png)
 
 ### Outcomes & Next Steps
 
