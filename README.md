@@ -1,4 +1,6 @@
 # AriaChat
+![AriaChat screenshot](https://res.cloudinary.com/excit3/image/upload/v1790748753/ChatGPT_Image_Sep_30_2026_09_12_19_AM_worl22.png)
+
 AriaChat is a research case study exploring **AI integration in future Excite! Innovation products**. It demonstrates conversational AI through context-aware responses, persistent conversations, automatic titles, message regeneration, greetings, and memory.
 
 
