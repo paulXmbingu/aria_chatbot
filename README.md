@@ -20,8 +20,9 @@ The case study established a foundation for AI integration, modular architecture
 
 # Test the Project locally
 
-- Download & Install on your os [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
-- Clone & open the repo.
+1. Install [**Ollama**](https://ollama.com/)
+2. Install [**uv**](https://docs.astral.sh/uv/getting-started/installation/)
+3. Clone & open the repo.
 
 ```bash
 uv sync
