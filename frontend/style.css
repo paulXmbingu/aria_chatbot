@@ -501,9 +501,18 @@ button:disabled {
     text-decoration: none;
 }
 
+.user-profile-link:hover .user-profile-name {
+    color: var(--primary);
+}
+
 .user-profile-name {
     color: inherit;
     white-space: nowrap;
+}
+
+.user-profile:hover .user-profile-name,
+.user-profile:hover .external-link-icon {
+    color: var(--primary);
 }
 
 .external-link-icon {
