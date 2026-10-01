@@ -7,15 +7,12 @@ from asgiref.sync import async_to_sync
 from django.db.models import Prefetch
 
 from rest_framework import generics, status
-
 from rest_framework.response import Response
-
 from rest_framework.views import APIView
 
 from ai.services.chat_service import ChatService
 
 from .models import Conversation, Message
-
 from .serializers import (
     ChatMessageSerializer,
     ConversationSerializer,
@@ -52,7 +49,6 @@ class ChatMessageView(APIView):
         serializer = ChatMessageSerializer(
             data=request.data
         )
-
         serializer.is_valid(
             raise_exception=True
         )
@@ -89,7 +85,6 @@ class ChatMessageView(APIView):
                 conversation,
                 message,
             )
-
         except Exception:
             logger.exception(
                 "Failed to generate chat response "
@@ -144,7 +139,6 @@ class RegenerateMessageView(APIView):
         serializer = RegenerateMessageSerializer(
             data=request.data
         )
-
         serializer.is_valid(
             raise_exception=True
         )
@@ -161,7 +155,6 @@ class RegenerateMessageView(APIView):
             conversation = Conversation.objects.get(
                 id=conversation_id
             )
-
         except Conversation.DoesNotExist:
             logger.warning(
                 "Conversation %s not found",
@@ -181,7 +174,6 @@ class RegenerateMessageView(APIView):
                 conversation=conversation,
                 role="assistant",
             )
-
         except Message.DoesNotExist:
             logger.warning(
                 "Assistant message %s not found "
@@ -204,7 +196,6 @@ class RegenerateMessageView(APIView):
                 conversation,
                 assistant_message,
             )
-
         except ValueError as error:
             logger.warning(
                 "Unable to regenerate message %s: %s",
@@ -218,7 +209,6 @@ class RegenerateMessageView(APIView):
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
         except Exception:
             logger.exception(
                 "Failed to regenerate message %s "
@@ -258,7 +248,6 @@ class RenameConversationView(APIView):
         serializer = RenameConversationSerializer(
             data=request.data
         )
-
         serializer.is_valid(
             raise_exception=True
         )
@@ -274,7 +263,6 @@ class RenameConversationView(APIView):
             conversation = Conversation.objects.get(
                 id=conversation_id
             )
-
         except Conversation.DoesNotExist:
             logger.warning(
                 "Conversation %s not found for rename",
@@ -289,7 +277,6 @@ class RenameConversationView(APIView):
             )
 
         conversation.title = title
-
         conversation.save(
             update_fields=["title"]
         )
@@ -313,7 +300,6 @@ class DeleteConversationView(APIView):
             conversation = Conversation.objects.get(
                 id=conversation_id
             )
-
         except Conversation.DoesNotExist:
             logger.warning(
                 "Conversation %s not found for deletion",
@@ -338,15 +324,35 @@ class GreetingView(APIView):
     def get(self, request):
         from datetime import datetime
 
-        from ai.services.greeting_service import GreetingService
-
-        greeting = async_to_sync(
-            GreetingService.generate
-        )(
-            datetime.now(),
+        from ai.services.greeting_service import (
+            GreetingService,
         )
 
+        try:
+            greeting = async_to_sync(
+                GreetingService.generate
+            )(
+                datetime.now(),
+            )
+        except Exception:
+            logger.exception(
+                "Failed to generate greeting"
+            )
+
+            return Response(
+                {
+                    "error": (
+                        "Unable to generate greeting."
+                    )
+                },
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+
         if not greeting:
+            logger.error(
+                "Greeting generation returned no response"
+            )
+
             return Response(
                 {
                     "error": "Unable to generate greeting."

@@ -3,7 +3,9 @@ import json
 from ai.prompts.response_planning_prompt import (
     RESPONSE_PLANNING_PROMPT,
 )
+
 from ai.services.ai_service import AIService
+
 from ai.services.response_plan import (
     COMPLEXITY_LEVELS,
     RESPONSE_APPROACHES,
@@ -60,6 +62,19 @@ class ResponsePlanningService:
         if not response:
             return None
 
+        response = response.strip()
+
+        if response.startswith("```"):
+            lines = response.splitlines()
+
+            if lines and lines[0].strip().startswith("```"):
+                lines = lines[1:]
+
+            if lines and lines[-1].strip() == "```":
+                lines = lines[:-1]
+
+            response = "\n".join(lines).strip()
+
         try:
             data = json.loads(response)
         except json.JSONDecodeError:
@@ -71,9 +86,11 @@ class ResponsePlanningService:
         approach = data.get("approach")
         depth = data.get("depth")
         structure = data.get("structure")
+
         requires_clarification = data.get(
             "requires_clarification"
         )
+
         complexity = data.get("complexity")
 
         if approach not in RESPONSE_APPROACHES:

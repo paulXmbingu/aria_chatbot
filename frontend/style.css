@@ -481,8 +481,35 @@ button:disabled {
 .user-profile {
     display: flex;
     align-items: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+.user-profile-link {
+    display: flex;
+    align-items: center;
     gap: 10px;
     min-width: 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+.user-profile-link:visited,
+.user-profile-link:hover,
+.user-profile-link:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+.user-profile-name {
+    color: inherit;
+    white-space: nowrap;
+}
+
+.external-link-icon {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1;
 }
 
 .user-avatar {
@@ -574,9 +601,18 @@ button:disabled {
     .sidebar.collapsed .desktop-brand .brand-name,
     .sidebar.collapsed .collapse-sidebar-button,
     .sidebar.collapsed #new-chat-btn,
-    .sidebar.collapsed .conversation-section,
-    .sidebar.collapsed .user-profile > span {
+    .sidebar.collapsed .conversation-section {
         display: none;
+    }
+
+    .sidebar.collapsed .user-profile-name,
+    .sidebar.collapsed .external-link-icon {
+        display: none;
+    }
+
+    .sidebar.collapsed .user-profile-link {
+        display: flex;
+        justify-content: center;
     }
 
     .sidebar.collapsed .collapsed-sidebar-actions {
