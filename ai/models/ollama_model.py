@@ -11,9 +11,10 @@ OLLAMA_HOST = os.getenv(
 
 MODEL_NAME = os.getenv(
     "OLLAMA_MODEL",
-    # "gemma3:4b",
-    "gemma3:12b",
+    "gemma3:4b",
+    # "gemma3:12b",
     # "gemma3:27b",
+    # "gemma4:e4b",
 )
 
 
