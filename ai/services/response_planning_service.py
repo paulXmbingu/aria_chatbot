@@ -1,11 +1,7 @@
 import json
 
-from ai.prompts.response_planning_prompt import (
-    RESPONSE_PLANNING_PROMPT,
-)
-
+from ai.prompts.planning import PLANNING_PROMPT
 from ai.services.ai_service import AIService
-
 from ai.services.response_plan import (
     COMPLEXITY_LEVELS,
     RESPONSE_APPROACHES,
@@ -16,10 +12,12 @@ from ai.services.response_plan import (
 
 
 class ResponsePlanningService:
+
     @staticmethod
     def build_prompt(
         message: str,
     ) -> str:
+
         response_approaches = "\n".join(
             f"- {name}: {description}"
             for name, description
@@ -44,21 +42,19 @@ class ResponsePlanningService:
             in COMPLEXITY_LEVELS.items()
         )
 
-        return (
-            RESPONSE_PLANNING_PROMPT
-            .format(
-                response_approaches=response_approaches,
-                response_depths=response_depths,
-                response_structures=response_structures,
-                complexity_levels=complexity_levels,
-                message=message,
-            )
+        return PLANNING_PROMPT.format(
+            response_approaches=response_approaches,
+            response_depths=response_depths,
+            response_structures=response_structures,
+            complexity_levels=complexity_levels,
+            message=message,
         )
 
     @staticmethod
     def parse_plan(
         response: str | None,
     ) -> ResponsePlan | None:
+
         if not response:
             return None
 
@@ -77,6 +73,7 @@ class ResponsePlanningService:
 
         try:
             data = json.loads(response)
+
         except json.JSONDecodeError:
             return None
 
@@ -86,11 +83,9 @@ class ResponsePlanningService:
         approach = data.get("approach")
         depth = data.get("depth")
         structure = data.get("structure")
-
         requires_clarification = data.get(
             "requires_clarification"
         )
-
         complexity = data.get("complexity")
 
         if approach not in RESPONSE_APPROACHES:
@@ -125,10 +120,9 @@ class ResponsePlanningService:
     async def plan(
         message: str,
     ) -> ResponsePlan | None:
-        prompt = (
-            ResponsePlanningService.build_prompt(
-                message
-            )
+
+        prompt = ResponsePlanningService.build_prompt(
+            message
         )
 
         response = await AIService.generate(
