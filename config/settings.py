@@ -90,7 +90,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": config(
-        default="postgresql://postgres:postgres@db:5432/aria_chatbot"
+        default="postgresql://localhost/aria_chatbot_psql"
     )
 }
 
