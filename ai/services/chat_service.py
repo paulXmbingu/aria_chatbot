@@ -2,11 +2,11 @@ from asgiref.sync import sync_to_async
 
 from ai.memory.memory_manager import MemoryManager
 from ai.services.ai_service import AIService
-from ai.services.context_prompt_service import ContextPromptService
-from ai.services.conversation_context_service import ConversationContextService
+from ai.context.context_prompt_service import ContextPromptService
+from ai.context.conversation_context_service import ConversationContextService
 from ai.services.conversation_title_service import ConversationTitleService
-from ai.services.intent_service import IntentService
-from ai.services.response_planning_service import ResponsePlanningService
+from ai.intent.intent_service import IntentService
+from ai.planning.response_planning_service import ResponsePlanningService
 from apps.chat.models import Conversation, Message
 
 

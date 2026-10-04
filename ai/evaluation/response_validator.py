@@ -1,4 +1,4 @@
-from ai.services.response_quality import (
+from ai.evaluation.response_quality import (
     ResponseQuality,
     ResponseQualityService,
 )

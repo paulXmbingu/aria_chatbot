@@ -1,11 +1,11 @@
-from ai.services.response_quality import (
+from ai.evaluation.response_quality import (
     ResponseQuality,
     ResponseQualityService,
 )
 from ai.services.response_sanitizer import (
     ResponseSanitizer,
 )
-from ai.services.response_validator import (
+from ai.evaluation.response_validator import (
     ResponseValidator,
 )
 

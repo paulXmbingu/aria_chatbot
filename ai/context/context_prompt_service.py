@@ -1,5 +1,5 @@
-from ai.services.context import Context
-from ai.services.response_plan import ResponsePlan
+from ai.context.context import Context
+from ai.planning.response_plan import ResponsePlan
 
 
 class ContextPromptService:

@@ -3,7 +3,7 @@ from asgiref.sync import sync_to_async
 from ai.memory.memory_context_service import (
     MemoryContextService,
 )
-from ai.services.context import Context
+from ai.context.context import Context
 from apps.chat.models import Conversation, Message
 
 
