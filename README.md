@@ -17,6 +17,9 @@ The core principle was to establish a **modular architecture and project structu
 
 The case study established a foundation for AI integration, modular architecture, and Backend–AI/ML collaboration. These findings will inform the progressive integration of AI-powered capabilities into [**Boltshift’s customer experience**](https://boltshift.vercel.app/) and vendor back office as product and engineering teams establish the required data hygiene, quality, and readiness across the roadmap.
 
+####
+![AriaChat System Architecture](https://res.cloudinary.com/excit3/image/upload/v1791306837/AWS_Cloud_Infrastructure_Architecture_Diagram_mogcyq.png)
+
 # Test the Project locally
 
 1. Install [**Ollama**](https://ollama.com/)
